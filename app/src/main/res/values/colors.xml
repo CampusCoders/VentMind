@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Figma -->
+    <color name="screen_background">#35373E</color>
+    <color name="button_background">#A4634D</color>
+    <color name="button_background_light">#BF9080</color>
+    <color name="text_color">#D9D9D9</color>
+    <color name="top_of_screen_color">#D9D9D9</color>
+    <color name="toolbar_color">#DCBABA</color>
+    <color name="button_background_dark_grey">#484A52</color>
+
 </resources>
