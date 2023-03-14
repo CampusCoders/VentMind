@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1081220669569",
+    "project_id": "ventmind-89040",
+    "storage_bucket": "ventmind-89040.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081220669569:android:9e0206b2ff17b23798ed80",
+        "android_client_info": {
+          "package_name": "com.campuscoders.ventmind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081220669569-5eqrhpuao9m43d60fi32mncm5o79nqdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJYWA0vF1_2RqIJeBEDJ73a__MdcAah8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081220669569-5eqrhpuao9m43d60fi32mncm5o79nqdm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
