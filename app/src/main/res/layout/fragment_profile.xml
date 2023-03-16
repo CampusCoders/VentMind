@@ -1,175 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/screen_background">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarProfile"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileConstraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/button_background"
-        android:theme="@style/Widget.AppCompat.Light.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Profile">
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="match_parent"
+        android:background="@color/screen_background">
 
-    <LinearLayout
-        android:id="@+id/linearProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="24dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarProfile">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="12dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/imageViewProfileAvatar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="16dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/custom_avatar_xl"></ImageView>
-            <TextView
-                android:id="@+id/textViewProfileUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:layout_marginRight="48dp"
-                android:layout_marginTop="20dp"
-                android:text="ExampleUsername"
-                android:textSize="18sp"></TextView>
-            <ImageView
-                android:id="@+id/imageViewProfileLockIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_user_lock"></ImageView>
-        </LinearLayout>
-
-        <ImageView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarProfile"
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginHorizontal="8dp"
-            android:background="@drawable/custom_line"></ImageView>
+            android:layout_height="wrap_content"
+            android:background="@color/button_background"
+            android:theme="@style/Widget.AppCompat.Light.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Profile">
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/linearProfile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginVertical="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="24dp"
+            android:orientation="vertical"
             android:gravity="center"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            android:background="@drawable/custom_profile_button">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarProfile">
 
-            <TextView
-                android:id="@+id/textViewProfileScore"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:layout_gravity="center"
-                android:padding="4dp"
-                android:textStyle="bold"
-                android:text="1250"
-                android:textSize="24sp"></TextView>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_star">
-
-            </ImageView>
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginHorizontal="8dp"
-            android:background="@drawable/custom_line"></ImageView>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewProfileBio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:padding="12dp"
-                android:textSize="18sp"
+                android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:textStyle="italic|bold"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id justo eget dolor rhoncus fringilla ullamcorper et turpis."
-                android:layout_marginHorizontal="12dp"></TextView>
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/imageViewProfileAvatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/custom_avatar_xl"></ImageView>
+                <TextView
+                    android:id="@+id/textViewProfileUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/text_color"
+                    android:text="Username"
+                    android:textSize="18sp"></TextView>
+            </LinearLayout>
+
             <ImageView
-                android:id="@+id/imageViewProfileEditIcon"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/custom_line"></ImageView>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/custom_line"></ImageView>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_edit"></ImageView>
+                android:layout_marginHorizontal="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewProfileBio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color"
+                    android:padding="12dp"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textStyle="italic|bold"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id justo eget dolor rhoncus fringilla ullamcorper et turpis."
+                    android:layout_marginHorizontal="12dp"></TextView>
+                <ImageView
+                    android:id="@+id/imageViewProfileEditIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_edit"></ImageView>
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProfile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearProfile" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearProfileScore"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="48dp"
+        android:padding="4dp"
+        android:background="@drawable/custom_score_button"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSettings"
-            android:layout_width="108dp"
-            android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_anchor="@id/linearProfile"
+        app:layout_anchorGravity="top|right|end">
+        <TextView
+            android:id="@+id/textViewProfileScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:padding="12dp"
-            android:background="@drawable/custom_button"
-            android:text="Ayarlar"
-            android:textAllCaps="false"
-            android:textColor="@color/text_color"
-            android:textSize="16sp"></androidx.appcompat.widget.AppCompatButton>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonAchievements"
-            android:layout_width="108dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:padding="12dp"
-            android:background="@drawable/custom_button"
-            android:text="Başarımlar"
-            android:textAllCaps="false"
-            android:textColor="@color/text_color"
-            android:textSize="16sp"></androidx.appcompat.widget.AppCompatButton>
-
+            android:padding="4dp"
+            android:text="1250"
+            android:textColor="@color/screen_background"
+            android:textSize="20sp"
+            android:textStyle="bold"></TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_star">
+        </ImageView>
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
