@@ -8,7 +8,7 @@
     android:background="@color/screen_background">
 
     <ImageView
-        android:id="@+id/imageViewAppLogo"
+        android:id="@+id/imageViewRegisterAppLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="64dp"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLoginInputs"
+        android:id="@+id/linearRegisterInputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -27,20 +27,37 @@
         android:layout_marginHorizontal="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewAppLogo">
+        app:layout_constraintTop_toBottomOf="@+id/imageViewRegisterAppLogo">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Log in to VentMind"
+            android:text="Create Your Account"
             android:textColor="@color/text_color"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/editTextLoginEmailAddress"
+            android:id="@+id/editTextRegisterUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/custom_person"
+            android:drawablePadding="8dp"
+            android:ems="50"
+            android:hint="Username"
+            android:inputType="textEmailAddress"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/text_color"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/editTextRegisterEmailAddress"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_gravity="center"
@@ -57,7 +74,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editTextLoginPassword"
+            android:id="@+id/editTextRegisterPassword"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_gravity="center"
@@ -76,39 +93,18 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLoginButtons"
+        android:id="@+id/linearRegisterButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="28dp"
         android:gravity="center"
-        app:layout_constraintEnd_toEndOf="@+id/linearLoginInputs"
-        app:layout_constraintStart_toStartOf="@+id/linearLoginInputs"
-        app:layout_constraintTop_toBottomOf="@+id/linearLoginInputs">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Forgot Password"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_color"/>
+        app:layout_constraintEnd_toEndOf="@+id/linearRegisterInputs"
+        app:layout_constraintStart_toStartOf="@+id/linearRegisterInputs"
+        app:layout_constraintTop_toBottomOf="@+id/linearRegisterInputs">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonSignIn"
-            android:layout_width="108dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="28dp"
-            android:textSize="16sp"
-            android:background="@drawable/custom_button"
-            android:text="Sign In"
-            android:textColor="@color/text_color"
-            android:textAllCaps="false"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonLoginCreate"
+            android:id="@+id/buttonRegisterCreate"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginVertical="16dp"
