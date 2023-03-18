@@ -1,5 +1,5 @@
 package com.campuscoders.ventmind.model
 
-data class User(
+data class PostFeed(
     var id: String = "",
 )
