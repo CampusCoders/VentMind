@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentAvatarsBinding
+import com.campuscoders.ventmind.viewmodel.AvatarsViewModel
 
 class AvatarsFragment: Fragment() {
 
     private var _binding: FragmentAvatarsBinding? = null
     private val binding get() = _binding!!
+
+    val viewModel: AvatarsViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAvatarsBinding.inflate(inflater,container,false)
