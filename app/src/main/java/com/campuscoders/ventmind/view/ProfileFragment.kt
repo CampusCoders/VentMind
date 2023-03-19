@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentProfileBinding
 import com.campuscoders.ventmind.viewmodel.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment: Fragment() {
 
     private var _binding: FragmentProfileBinding? = null

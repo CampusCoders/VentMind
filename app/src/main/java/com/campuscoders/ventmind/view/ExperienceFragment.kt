@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentExperienceBinding
 import com.campuscoders.ventmind.viewmodel.ExpViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ExperienceFragment: Fragment() {
 
     private var _binding: FragmentExperienceBinding? = null

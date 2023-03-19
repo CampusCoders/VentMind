@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentCreatePostBinding
 import com.campuscoders.ventmind.viewmodel.CreatePostViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreatePostFragment: Fragment() {
 
     private var _binding: FragmentCreatePostBinding? = null

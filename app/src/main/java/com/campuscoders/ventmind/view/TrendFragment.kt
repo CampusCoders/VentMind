@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentTrendBinding
 import com.campuscoders.ventmind.viewmodel.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TrendFragment: Fragment() {
 
     private  var _binding: FragmentTrendBinding? = null

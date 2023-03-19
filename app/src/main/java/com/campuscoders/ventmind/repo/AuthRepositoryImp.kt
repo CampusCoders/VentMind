@@ -6,12 +6,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AuthRepositoryImp(
-    val auth: FirebaseAuth,
-    val database: FirebaseFirestore
+    private val auth: FirebaseAuth,
+    private val database: FirebaseFirestore
 ): AuthRepository {
 
     override fun loginUser(email: String, password: String, result: (UiState<String>) -> Unit) {
-        // kullanıcıya login işlemi yaptırılır
+        auth.signInWithEmailAndPassword(email,password)
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    result.invoke(UiState.Success("Login Successfully."))
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure("Authentication failed."))
+            }
     }
 
     override fun registerUser(email: String, password: String, user: User, result: (UiState<String>) -> Unit) {

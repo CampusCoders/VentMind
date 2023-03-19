@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentForgotPasswordBinding
 import com.campuscoders.ventmind.viewmodel.AuthViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgotPasswordFragment: Fragment() {
 
     private var _binding: FragmentForgotPasswordBinding? = null
