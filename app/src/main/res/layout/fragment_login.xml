@@ -11,7 +11,7 @@
         android:id="@+id/imageViewAppLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="56dp"
         android:src="@drawable/ic_star"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,7 +22,7 @@
         android:id="@+id/linearLoginInputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
         android:layout_marginHorizontal="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <EditText
@@ -70,7 +70,7 @@
             android:inputType="textPassword"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
     </LinearLayout>
