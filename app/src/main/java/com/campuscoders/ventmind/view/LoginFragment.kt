@@ -38,11 +38,12 @@ class LoginFragment: Fragment() {
         }
         binding.textViewForgotPassword.setOnClickListener {
             // forgotPassword ekranına gider
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
         binding.buttonSignIn.setOnClickListener {
             // validation kontrolü ile login işlemi yapılır.
             if(validation()) {
-                viewModel.login(binding.editTextLoginEmailAddress.text.toString(),binding.editTextLoginPassword.text.toString())
+                viewModel.loginFun(binding.editTextLoginEmailAddress.text.toString(),binding.editTextLoginPassword.text.toString())
             }
         }
     }

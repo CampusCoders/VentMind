@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentRegisterBinding
+import com.campuscoders.ventmind.model.User
+import com.campuscoders.ventmind.util.*
 import com.campuscoders.ventmind.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +28,73 @@ class RegisterFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // logic
+        observer()
+
+        binding.buttonRegisterCreate.setOnClickListener {
+            if(validation()) {
+                viewModel.registerFun(
+                    binding.editTextRegisterEmailAddress.text.toString(),
+                    binding.editTextRegisterPassword.text.toString(),
+                    createUser()
+                )
+            }
+        }
+    }
+
+    private fun observer() {
+        viewModel.register.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarRegister.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarRegister.hide()
+                    toast(state.data)
+                }
+                is UiState.Failure -> {
+                    binding.progressBarRegister.hide()
+                    toast(state.error!!)
+                }
+            }
+        }
+    }
+
+    private fun createUser(): User {
+        return User(
+            user_avatar = "",
+            user_bio = "",
+            user_email = binding.editTextRegisterEmailAddress.text.toString(),
+            user_lock = false,
+            user_nick = binding.editTextRegisterUsername.text.toString(),
+            user_score = 0
+        )
+    }
+
+    private fun validation(): Boolean {
+        var isValid = true
+        if(binding.editTextRegisterUsername.text.toString().isNullOrEmpty()) {
+            isValid = false
+            toast("Enter username.")
+        }
+        if (binding.editTextRegisterEmailAddress.text.toString().isNullOrEmpty()) {
+            isValid = false
+            toast("Enter email address.")
+        } else {
+            if (!binding.editTextRegisterEmailAddress.text.toString().isValidEmail()) {
+                isValid = false
+                toast("Invalid email address.")
+            }
+        }
+        if (binding.editTextRegisterPassword.text.toString().isNullOrEmpty()) {
+            isValid = false
+            toast("Enter password.")
+        } else {
+            if (binding.editTextRegisterPassword.text.toString().length < 8) {
+                isValid = false
+                toast("Invalid password.")
+            }
+        }
+        return isValid
     }
 
     override fun onDestroyView() {

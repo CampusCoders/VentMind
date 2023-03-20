@@ -28,21 +28,21 @@ class AuthViewModel @Inject constructor(
         get() = _forgotPassword
 
     // repository'deki fonksiyonları çağıran viewmodel fonksiyonları
-    fun login(email: String, password: String) {
+    fun loginFun(email: String, password: String) {
         _login.value = UiState.Loading
         repository.loginUser(email, password) {
             _login.value = it
         }
     }
 
-    fun register(email: String, password: String, user: User) {
+    fun registerFun(email: String, password: String, user: User) {
         _register.value = UiState.Loading
         repository.registerUser(email,password,user) {
             _register.value = it
         }
     }
 
-    fun forgotPassword(email: String) {
+    fun forgotPasswordFun(email: String) {
         _forgotPassword.value = UiState.Loading
         repository.forgotPassword(email) {
             _forgotPassword.value = it
