@@ -2,6 +2,8 @@ package com.campuscoders.ventmind.di
 
 import com.campuscoders.ventmind.repo.AuthRepository
 import com.campuscoders.ventmind.repo.AuthRepositoryImp
+import com.campuscoders.ventmind.repo.FeedRepository
+import com.campuscoders.ventmind.repo.FeedRepositoryImp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -18,5 +20,11 @@ object RepositoryModule {
     @Singleton
     fun provideAuthRepository(database: FirebaseFirestore, auth: FirebaseAuth): AuthRepository {
         return AuthRepositoryImp(auth,database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFeedRepository(database: FirebaseFirestore): FeedRepository {
+        return FeedRepositoryImp(database)
     }
 }

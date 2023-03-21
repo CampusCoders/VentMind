@@ -61,6 +61,7 @@ class LoginFragment: Fragment() {
                 is UiState.Success -> {
                     binding.progressBarLogin.hide()
                     toast(state.data)
+                    findNavController().navigate(R.id.action_loginFragment_to_feedFragment)
                 }
             }
         }

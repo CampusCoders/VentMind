@@ -1,6 +1,7 @@
 package com.campuscoders.ventmind.repo
 
 import com.campuscoders.ventmind.model.PostFeed
+import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -8,7 +9,22 @@ class FeedRepositoryImp(
     val database: FirebaseFirestore
 ): FeedRepository {
     override fun getPosts(result: (UiState<List<PostFeed>>) -> Unit) {
-        // PostFeed'den filtresiz bir şekilde tüm postlar çekilir.
+        database.collection(FirestoreCollection.POST_FEED).get()
+            .addOnSuccessListener {
+                val postFeedList = arrayListOf<PostFeed>()
+                for(document in it) {
+                    val postFeed = document.toObject(PostFeed::class.java)
+                    postFeedList.add(postFeed)
+                }
+                result.invoke(
+                    UiState.Success(postFeedList)
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
+            }
     }
 
     override fun getPosts(feeling: String, result: (UiState<List<PostFeed>>) -> Unit) {

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.databinding.FragmentRegisterBinding
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.*
@@ -50,6 +52,7 @@ class RegisterFragment: Fragment() {
                 is UiState.Success -> {
                     binding.progressBarRegister.hide()
                     toast(state.data)
+                    findNavController().navigate(R.id.action_registerFragment_to_feedFragment)
                 }
                 is UiState.Failure -> {
                     binding.progressBarRegister.hide()
