@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.campuscoders.ventmind.view.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -21,7 +23,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.campuscoders.ventmind.view.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_feedFragment"
             app:destination="@id/feedFragment" />
@@ -29,7 +32,8 @@
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.campuscoders.ventmind.view.ForgotPasswordFragment"
-        android:label="ForgotPasswordFragment" >
+        android:label="ForgotPasswordFragment"
+        tools:layout="@layout/fragment_forgot_password">
         <action
             android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -37,5 +41,63 @@
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.campuscoders.ventmind.view.FeedFragment"
-        android:label="FeedFragment" />
+        android:label="FeedFragment"
+        tools:layout="@layout/fragment_feed">
+        <action
+            android:id="@+id/action_feedFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_experienceFragment"
+            app:destination="@id/experienceFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_trendFragment"
+            app:destination="@id/trendFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_userListFragment"
+            app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.campuscoders.ventmind.view.CreatePostFragment"
+        android:label="CreatePostFragment"
+        tools:layout="@layout/fragment_create_post"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.campuscoders.ventmind.view.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/trendFragment"
+        android:name="com.campuscoders.ventmind.view.TrendFragment"
+        android:label="TrendFragment"
+        tools:layout="@layout/fragment_trend"/>
+    <fragment
+        android:id="@+id/experienceFragment"
+        android:name="com.campuscoders.ventmind.view.ExperienceFragment"
+        android:label="ExperienceFragment"
+        tools:layout="@layout/fragment_experience"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.campuscoders.ventmind.view.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="com.campuscoders.ventmind.view.UserListFragment"
+        android:label="UserListFragment"
+        tools:layout="@layout/fragment_user_list"/>
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.campuscoders.ventmind.view.CommentsFragment"
+        android:label="CommentsFragment"
+        tools:layout="@layout/fragment_comments"/>
 </navigation>

@@ -90,8 +90,6 @@ class AuthRepositoryImp(
                     UiState.Failure("Authentication failed, check email.")
                 )
             }
-
-        // kullanıcıya şifre resetleme maili gönderilir.
     }
 
     override fun updateUsername(username: String, result: (UiState<String>) -> Unit) {

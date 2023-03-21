@@ -28,27 +28,27 @@ class ForgotPasswordFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         observer()
+
         binding.forgotPassBtn.setOnClickListener{
             if(validation()){
                 viewModel.forgotPasswordFun(binding.emailEt.text.toString())
             }
         }
-
-        // logica
     }
 
     private fun observer(){
-        viewModel.forgotPassword.observe(viewLifecycleOwner){state->
-            when(state){
-                is UiState.Loading->{
+        viewModel.forgotPassword.observe(viewLifecycleOwner) { state->
+            when(state) {
+                is UiState.Loading -> {
                     binding.progressBarRegister.show()
                 }
-                is UiState.Failure->{
+                is UiState.Failure -> {
                     binding.progressBarRegister.hide()
                     toast(state.error!!)
                 }
-                is UiState.Success->{
+                is UiState.Success -> {
                     binding.progressBarRegister.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
@@ -75,5 +75,4 @@ class ForgotPasswordFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
