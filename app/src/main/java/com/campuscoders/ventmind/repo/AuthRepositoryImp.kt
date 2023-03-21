@@ -77,6 +77,20 @@ class AuthRepositoryImp(
     }
 
     override fun forgotPassword(email: String, result: (UiState<String>) -> Unit) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    result.invoke(UiState.Success("Email has been sent"))
+                } else {
+                    result.invoke(UiState.Failure(it.exception?.message))
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure("Authentication failed, check email.")
+                )
+            }
+
         // kullanıcıya şifre resetleme maili gönderilir.
     }
 
