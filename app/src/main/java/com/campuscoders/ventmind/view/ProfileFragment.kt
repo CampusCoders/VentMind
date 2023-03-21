@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentProfileBinding
+import com.campuscoders.ventmind.util.UiState
+import com.campuscoders.ventmind.util.hide
+import com.campuscoders.ventmind.util.show
+import com.campuscoders.ventmind.util.toast
 import com.campuscoders.ventmind.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,7 +30,33 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //logic
+        val userId = arguments?.getString("user_id",null)
+        userId?.let {
+            viewModel.getUser(it)
+        }
+
+        observer()
+    }
+
+    private fun observer() {
+        viewModel.user.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarProfile.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarProfile.hide()
+                    binding.textViewProfileUserName.text = state.data.user_nick
+                    binding.textViewProfileScore.text = state.data.user_score.toString()
+                    binding.textViewProfileBio.text = state.data.user_bio
+                    // avatar
+                }
+                is UiState.Failure -> {
+                    binding.progressBarProfile.hide()
+                    toast(state.error!!)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

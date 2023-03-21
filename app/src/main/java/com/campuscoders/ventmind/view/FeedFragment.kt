@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.adapter.FeedAdapter
 import com.campuscoders.ventmind.databinding.FragmentFeedBinding
 import com.campuscoders.ventmind.util.UiState
@@ -26,10 +28,16 @@ class FeedFragment: Fragment() {
     val feedAdapter by lazy {
         FeedAdapter(
             avatarOnItemClickListener = {
-                toast(it)
+                // profil ekranına gider
+                findNavController().navigate(R.id.action_feedFragment_to_profileFragment, Bundle().apply {
+                    putString("user_id",it)
+                })
             },
             usernameOnItemClickListener = {
-                toast(it)
+                // profil ekranına gider
+                findNavController().navigate(R.id.action_feedFragment_to_profileFragment, Bundle().apply {
+                    putString("user_id",it)
+                })
             },
             likeOnItemClickListener = {
                 toast(it)
@@ -57,7 +65,7 @@ class FeedFragment: Fragment() {
         observer()
 
         binding.fabFeed.setOnClickListener {
-            // create post ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
         }
     }
 
@@ -69,7 +77,6 @@ class FeedFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     binding.progressBarFeed.hide()
-                    // verileri recycler'a ver
                     feedAdapter.updateList(state.data.toMutableList())
                 }
                 is UiState.Failure -> {

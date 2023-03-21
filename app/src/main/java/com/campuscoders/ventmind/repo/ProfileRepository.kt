@@ -5,7 +5,7 @@ import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.UiState
 
 interface ProfileRepository {
-    fun getUser(result: (UiState<User>) -> Unit)
-    fun getUserPosts(result: (UiState<List<PostFeed>>) -> Unit)
+    fun getUser(userId: String, result: (UiState<User>) -> Unit)
+    fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit)
     fun setUserBio(bio: String, result: (UiState<String>) -> Unit)
 }

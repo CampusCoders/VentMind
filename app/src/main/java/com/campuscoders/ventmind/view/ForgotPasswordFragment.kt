@@ -42,14 +42,14 @@ class ForgotPasswordFragment: Fragment() {
         viewModel.forgotPassword.observe(viewLifecycleOwner) { state->
             when(state) {
                 is UiState.Loading -> {
-                    binding.progressBarRegister.show()
+                    binding.progressBarForgotPass.show()
                 }
                 is UiState.Failure -> {
-                    binding.progressBarRegister.hide()
+                    binding.progressBarForgotPass.hide()
                     toast(state.error!!)
                 }
                 is UiState.Success -> {
-                    binding.progressBarRegister.hide()
+                    binding.progressBarForgotPass.hide()
                     toast(state.data)
                     findNavController().navigate(R.id.action_forgotPasswordFragment_to_loginFragment)
                 }
