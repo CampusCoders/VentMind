@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class AuthRepositoryImp(
     private val auth: FirebaseAuth,
@@ -93,14 +94,45 @@ class AuthRepositoryImp(
     }
 
     override fun updateUsername(username: String, result: (UiState<String>) -> Unit) {
-        // alınan username, kullanıcının id'si ile çekilen User document'inde güncellenir
+
+        val document = database.collection(FirestoreCollection.USER).document(
+            auth.currentUser?.uid ?: "error"
+        )
+
+        document.update("username",username)
+            .addOnCompleteListener{
+                if(it.isSuccessful){
+                    result.invoke(UiState.Success("Username has been updated"))
+                }else{
+                    result.invoke((UiState.Failure(it.exception?.message)))
+                }
+            }
+            .addOnFailureListener{
+                result.invoke(UiState.Failure("Authentication failed"))
+            }
     }
 
     override fun logOut() {
-
+        val user = auth.currentUser
+        if(user != null){
+            auth.signOut()
+        }
     }
 
     override fun deleteAccount() {
+        val user = database.collection(FirestoreCollection.USER).document(
+            auth.currentUser?.uid?:"error")
 
+        if (user != null){
+            user.delete()
+                .addOnSuccessListener {
+                    UiState.Success("User has been deleted")
+                }
+                .addOnFailureListener{
+                    UiState.Failure("Delete operation failed")
+                }
+        }else{
+            UiState.Failure("Authentication failed")
+        }
     }
 }
