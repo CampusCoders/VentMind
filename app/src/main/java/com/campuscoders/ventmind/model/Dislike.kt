@@ -1,5 +1,6 @@
 package com.campuscoders.ventmind.model
 
 data class Dislike(
-    var id: String = "",
+    val post_id : String? = "",
+    val user_id : String? = ""
 )

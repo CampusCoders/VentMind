@@ -1,5 +1,6 @@
 package com.campuscoders.ventmind.model
 
 data class LikeExp(
-    var id: String = "",
+    val post_id : String? = "",
+    val user_id : String? = ""
 )
