@@ -35,6 +35,8 @@ class ProfileRepositoryImp(
 
     override fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit) {
         // kullanıcı id'sine göre PostFeed'den veriler çekilir. (kullanıcının kendi postları)
+
+
     }
 
     override fun setUserBio(bio: String, result: (UiState<String>) -> Unit) {
