@@ -11,7 +11,6 @@ class ProfileRepositoryImp(
 ): ProfileRepository {
 
     override fun getUser(userId: String, result: (UiState<User>) -> Unit) {
-        println(userId)
         val document = database.collection(FirestoreCollection.USER).document(userId)
         document.get()
             .addOnSuccessListener {
@@ -34,12 +33,29 @@ class ProfileRepositoryImp(
     }
 
     override fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit) {
-        // kullanıcı id'sine göre PostFeed'den veriler çekilir. (kullanıcının kendi postları)
-
-
+        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id", userId).get()
+            .addOnSuccessListener {
+                val postFeedListById = arrayListOf<PostFeed>()
+                for(document in it) {
+                    val postFeed = document.toObject(PostFeed::class.java)
+                    postFeedListById.add(postFeed)
+                }
+                result.invoke(
+                    UiState.Success(postFeedListById)
+                )
+            }
+            .addOnFailureListener{
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
+            }
     }
 
     override fun setUserBio(bio: String, result: (UiState<String>) -> Unit) {
-        // kullanıcı id'sine göre User'daki bio güncellenir.
+
+    }
+
+    override fun checkUser(result: (UiState<Boolean>) -> Unit) {
+        TODO("Not yet implemented")
     }
 }

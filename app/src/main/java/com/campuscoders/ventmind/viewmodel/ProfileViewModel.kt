@@ -3,6 +3,7 @@ package com.campuscoders.ventmind.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.repo.ProfileRepository
 import com.campuscoders.ventmind.util.UiState
@@ -18,10 +19,24 @@ class ProfileViewModel @Inject constructor(
     val user: LiveData<UiState<User>>
         get() = _user
 
+    private val _post = MutableLiveData<UiState<List<PostFeed>>>()
+    val post: LiveData<UiState<List<PostFeed>>>
+        get() = _post
+
+    private val _bio = MutableLiveData<UiState<String>>()
+
+
     fun getUser(userId: String) {
         _user.value = UiState.Loading
         repository.getUser(userId) {
             _user.value = it
+        }
+    }
+
+    fun getPosts(userId: String) {
+        _post.value = UiState.Loading
+        repository.getUserPosts(userId) {
+            _post.value = it
         }
     }
 }

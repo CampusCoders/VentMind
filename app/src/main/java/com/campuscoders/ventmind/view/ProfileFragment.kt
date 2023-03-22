@@ -6,6 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.campuscoders.ventmind.R
+import com.campuscoders.ventmind.adapter.FeedAdapter
 import com.campuscoders.ventmind.databinding.FragmentProfileBinding
 import com.campuscoders.ventmind.util.UiState
 import com.campuscoders.ventmind.util.hide
@@ -21,6 +25,18 @@ class ProfileFragment: Fragment() {
     private val binding get() = _binding!!
 
     val viewModel: ProfileViewModel by viewModels()
+    val feedAdapter by lazy {
+        FeedAdapter(
+            avatarOnItemClickListener = {},
+            usernameOnItemClickListener = {},
+            likeOnItemClickListener = {
+                toast(it)
+            },
+            commentOnItemClickListener = {
+                toast(it)
+            }
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding= FragmentProfileBinding.inflate(inflater,container,false)
@@ -30,9 +46,14 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // recyclerView
+        binding.recyclerViewProfile.adapter = feedAdapter
+        binding.recyclerViewProfile.layoutManager = LinearLayoutManager(requireContext())
+
         val userId = arguments?.getString("user_id",null)
         userId?.let {
             viewModel.getUser(it)
+            viewModel.getPosts(it)
         }
 
         observer()
@@ -50,6 +71,22 @@ class ProfileFragment: Fragment() {
                     binding.textViewProfileScore.text = state.data.user_score.toString()
                     binding.textViewProfileBio.text = state.data.user_bio
                     // avatar
+                }
+                is UiState.Failure -> {
+                    binding.progressBarProfile.hide()
+                    toast(state.error!!)
+                }
+            }
+        }
+        viewModel.post.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarProfile.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarProfile.hide()
+                    // recycler view
+                    feedAdapter.updateList(state.data.toMutableList())
                 }
                 is UiState.Failure -> {
                     binding.progressBarProfile.hide()
