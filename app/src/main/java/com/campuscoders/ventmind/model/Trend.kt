@@ -1,5 +1,6 @@
 package com.campuscoders.ventmind.model
 
 data class Trend(
-    var id: String = "",
+    val trend_score: Int? = 0,
+    val trend_count: Int? = 0
 )
