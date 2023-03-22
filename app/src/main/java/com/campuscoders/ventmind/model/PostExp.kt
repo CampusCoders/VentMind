@@ -9,7 +9,7 @@ data class PostExp(
     val post_avatar: String? = "",
     val post_comment_count: Int? = 0,
     val post_content: String? = "",
-    val post_like_count: Int? = 0,
+    val post_dislike_count: Int? = 0,
     val post_nick: String? = "",
     val post_tag: String? = "",
     val post_user_id: String? = ""
