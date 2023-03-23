@@ -50,7 +50,7 @@ class CreatePostRepositoryImp(
     }
 
     override fun addPostExp(post: PostExp, result: (UiState<String>) -> Unit) {
-        post.post_user_id = auth.currentUser!!.uid
+       post.post_user_id = auth.currentUser!!.uid
         database.collection(FirestoreCollection.POST_EXP).add(post)
             .addOnCompleteListener {
                 if (it.isSuccessful){
