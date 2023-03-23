@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentUserListBinding
+import com.campuscoders.ventmind.util.UiState
 import com.campuscoders.ventmind.viewmodel.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +26,25 @@ class UserListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observer()
+        viewModel.getUsers()
         // logic
+    }
+
+    private fun observer(){
+        viewModel.users.observe(viewLifecycleOwner){state->
+            when(state){
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+
+                }
+                is UiState.Failure -> {
+
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.campuscoders.ventmind.databinding.FragmentTrendBinding
+import com.campuscoders.ventmind.util.UiState
+import com.campuscoders.ventmind.util.hide
+import com.campuscoders.ventmind.util.show
 import com.campuscoders.ventmind.viewmodel.ListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,8 +28,25 @@ class TrendFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observer()
+        viewModel.getTrends()
         //logic
+    }
+
+    private fun observer(){
+        viewModel.trend.observe(viewLifecycleOwner){state->
+            when(state){
+                is UiState.Loading -> {
+
+                }
+                is UiState.Success -> {
+
+                }
+                is UiState.Failure -> {
+
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
