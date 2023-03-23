@@ -27,8 +27,8 @@ class ProfileViewModel @Inject constructor(
     val bio: LiveData<UiState<String>>
         get() = _bio
 
-    private val _checkUser = MutableLiveData<UiState<String>>()
-    val checkUser: LiveData<UiState<String>>
+    private val _checkUser = MutableLiveData<Boolean>()
+    val checkUser: LiveData<Boolean>
         get() = _checkUser
 
 
@@ -54,7 +54,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun checkUser() {
-        _checkUser.value = UiState.Loading
+        _checkUser.value = false
         repository.checkUser {
             _checkUser.value = it
         }

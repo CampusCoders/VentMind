@@ -27,6 +27,18 @@ class AuthViewModel @Inject constructor(
     val forgotPassword: LiveData<UiState<String>>
         get() = _forgotPassword
 
+    private val _updateUsername = MutableLiveData<UiState<String>>()
+    val updateUsername: LiveData<UiState<String>>
+        get() = _forgotPassword
+
+    private val _logOut=MutableLiveData<UiState<String>>()
+    val logOut:LiveData<UiState<String>>
+        get() = _logOut
+
+    private val _deleteAccount=MutableLiveData<UiState<String>>()
+    val deleteAccount:LiveData<UiState<String>>
+        get() = _deleteAccount
+
     // repository'deki fonksiyonları çağıran viewmodel fonksiyonları
     fun loginFun(email: String, password: String) {
         _login.value = UiState.Loading
@@ -46,6 +58,27 @@ class AuthViewModel @Inject constructor(
         _forgotPassword.value = UiState.Loading
         repository.forgotPassword(email) {
             _forgotPassword.value = it
+        }
+    }
+
+    fun updateUsernameFun(username: String) {
+        _updateUsername.value = UiState.Loading
+        repository.updateUsername(username) {
+            _updateUsername.value = it
+        }
+    }
+
+    fun logOutFun(){
+        _logOut.value=UiState.Loading
+        repository.logOut(){
+            _logOut.value=it
+        }
+    }
+
+    fun deleteAccountFun(){
+        _deleteAccount.value=UiState.Loading
+        repository.deleteAccount(){
+            _deleteAccount.value=it
         }
     }
 }

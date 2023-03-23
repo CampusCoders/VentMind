@@ -9,6 +9,6 @@ interface AuthRepository {
     fun updateUserInfo(user: User, result: (UiState<String>) -> Unit)
     fun forgotPassword(email: String, result: (UiState<String>) -> Unit)
     fun updateUsername(username: String, result: (UiState<String>) -> Unit)
-    fun logOut()
-    fun deleteAccount()
+    fun logOut(result: (UiState<String>) -> Unit)
+    fun deleteAccount(result: (UiState<String>) -> Unit)
 }

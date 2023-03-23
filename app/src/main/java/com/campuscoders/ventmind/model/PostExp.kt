@@ -5,12 +5,12 @@ import java.util.*
 
 data class PostExp(
     @ServerTimestamp
-    var created_at : Date? = Date(),
-    var post_avatar: String? = "",
-    var post_comment_count: Int? = 0,
-    var post_content: String? = "",
-    var post_dislike_count: Int? = 0,
-    var post_nick: String? = "",
-    var post_tag: String? = "",
-    var post_user_id: String? = ""
+    val created_at : Date? = Date(),
+    val post_avatar: String? = "",
+    val post_comment_count: Int? = 0,
+    val post_content: String? = "",
+    val post_dislike_count: Int? = 0,
+    val post_nick: String? = "",
+    val post_tag: String? = "",
+    val post_user_id: String? = ""
 )

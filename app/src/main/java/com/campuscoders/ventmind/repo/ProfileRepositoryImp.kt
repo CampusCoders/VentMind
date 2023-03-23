@@ -54,7 +54,7 @@ class ProfileRepositoryImp(
     }
 
     override fun setUserBio(bio: String, result: (UiState<String>) -> Unit) {
-        val userId = auth.currentUser
+        val userId = auth.currentUser?.uid
         val document = database.collection(FirestoreCollection.USER).document(userId.toString())
         document.update("user_bio",bio)
             .addOnSuccessListener {
@@ -63,16 +63,19 @@ class ProfileRepositoryImp(
                 )
             }
             .addOnFailureListener {
+                println(it.localizedMessage)
                 result.invoke(
                     UiState.Failure(it.localizedMessage)
                 )
             }
     }
 
-    override fun checkUser(result: (UiState<String>) -> Unit) {
-        auth.currentUser?.let {
-            result.invoke(UiState.Success("true"))
+    override fun checkUser(result: (Boolean) -> Unit) {
+        val user = auth.currentUser
+        if(user == null) {
+            result.invoke(true)
+        } else {
+            result.invoke(false)
         }
-        result.invoke(UiState.Failure("another user"))
     }
 }

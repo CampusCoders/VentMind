@@ -99,7 +99,7 @@ class AuthRepositoryImp(
             auth.currentUser?.uid ?: "error"
         )
 
-        document.update("username",username)
+        document.update("user_nick",username)
             .addOnCompleteListener{
                 if(it.isSuccessful){
                     result.invoke(UiState.Success("Username has been updated"))
@@ -112,27 +112,31 @@ class AuthRepositoryImp(
             }
     }
 
-    override fun logOut() {
+    override fun logOut(result: (UiState<String>) -> Unit) {
         val user = auth.currentUser
         if(user != null){
             auth.signOut()
+            result.invoke(UiState.Success("User has been sign out"))
         }
     }
 
-    override fun deleteAccount() {
+    override fun deleteAccount(result: (UiState<String>) -> Unit) {
         val user = database.collection(FirestoreCollection.USER).document(
             auth.currentUser?.uid?:"error")
 
+        val userAuth = auth.currentUser
+
         if (user != null){
             user.delete()
-                .addOnSuccessListener {
-                    UiState.Success("User has been deleted")
+                .addOnCompleteListener{
+                    userAuth?.delete()
+                    result.invoke(UiState.Success("User has been deleted"))
                 }
                 .addOnFailureListener{
-                    UiState.Failure("Delete operation failed")
+                    result.invoke(UiState.Failure("Delete operation failed"))
                 }
         }else{
-            UiState.Failure("Authentication failed")
+            result.invoke(UiState.Failure("Authentication failed"))
         }
     }
 }
