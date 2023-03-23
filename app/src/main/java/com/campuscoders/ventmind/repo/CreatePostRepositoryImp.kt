@@ -4,14 +4,17 @@ import com.campuscoders.ventmind.model.PostExp
 import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.UiState
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CreatePostRepositoryImp(
-    val database: FirebaseFirestore
+    val database: FirebaseFirestore,
+    val auth: FirebaseAuth
 ): CreatePostRepository {
 
     override fun getUser(result: (UiState<User>) -> Unit) {
         // User'dan kullanıcının verileri çekilir.
+        val userId = auth.currentUser
     }
 
     override fun addPostFeed(post: PostFeed, result: (UiState<String>) -> Unit) {
