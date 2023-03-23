@@ -38,6 +38,8 @@ class CreatePostFragment: Fragment() {
 
         observer()
 
+        viewModel.getUser()
+
         binding.buttonShareFeeling.setOnClickListener {
             if(validation()) {
                 viewModel.addPostFeed(createPostFeed())

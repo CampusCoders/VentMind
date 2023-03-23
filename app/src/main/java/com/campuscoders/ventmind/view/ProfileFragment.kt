@@ -36,6 +36,8 @@ class ProfileFragment: Fragment() {
         )
     }
 
+    private var userIdFromPost: String = ""
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding= FragmentProfileBinding.inflate(inflater,container,false)
         return binding.root
@@ -44,11 +46,18 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val userId = arguments?.getString("user_id",null)
+        userId?.let {
+            viewModel.getUser(it)
+            viewModel.getPosts(it)
+            userIdFromPost = it
+        }
+
         // recyclerView
         binding.recyclerViewProfile.adapter = feedAdapter
         binding.recyclerViewProfile.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.checkUser()
+        viewModel.checkUser(userIdFromPost)
 
         // ui
         binding.editTextProfileBio.isEnabled = false
@@ -64,13 +73,9 @@ class ProfileFragment: Fragment() {
                 toast("Enter bio")
             } else {
                 viewModel.setBio(binding.editTextProfileBio.text.toString())
+                binding.imageViewProfileEditIcon.show()
+                binding.imageViewProfileUpdateIcon.hide()
             }
-        }
-
-        val userId = arguments?.getString("user_id",null)
-        userId?.let {
-            viewModel.getUser(it)
-            viewModel.getPosts(it)
         }
 
         observer()
@@ -130,12 +135,13 @@ class ProfileFragment: Fragment() {
         }
         viewModel.checkUser.observe(viewLifecycleOwner) { state ->
             if (state) {
-                // true ise kullanıcının profil ekranıdır
+                // true ise kullanıcının profil ekranıdır. edit ikonu gösterilecek, update saklanacak
                 binding.imageViewProfileEditIcon.show()
                 binding.imageViewProfileUpdateIcon.hide()
             } else {
-                // başka birinin profil ekranı
-                binding.linearEdit.hide()
+                // başka birinin profil ekranı ise edit ve update iconları saklanacak
+                binding.imageViewProfileEditIcon.hide()
+                binding.imageViewProfileUpdateIcon.hide()
             }
         }
     }

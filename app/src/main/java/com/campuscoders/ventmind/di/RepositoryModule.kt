@@ -36,4 +36,10 @@ object RepositoryModule {
     fun provideCreatePostRepository(database: FirebaseFirestore, auth: FirebaseAuth): CreatePostRepository {
         return CreatePostRepositoryImp(database, auth)
     }
+
+    @Provides
+    @Singleton
+    fun provideListRepository(database: FirebaseFirestore): ListRepository {
+        return ListRepositoryImp(database)
+    }
 }

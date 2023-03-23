@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 
 class AuthRepositoryImp(
     private val auth: FirebaseAuth,
@@ -81,14 +80,14 @@ class AuthRepositoryImp(
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener {
                 if(it.isSuccessful) {
-                    result.invoke(UiState.Success("Email has been sent"))
+                    result.invoke(UiState.Success("Email has been sent."))
                 } else {
                     result.invoke(UiState.Failure(it.exception?.message))
                 }
             }
             .addOnFailureListener {
                 result.invoke(
-                    UiState.Failure("Authentication failed, check email.")
+                    UiState.Failure("Authentication failed! Please, check your email.")
                 )
             }
     }
@@ -102,13 +101,13 @@ class AuthRepositoryImp(
         document.update("user_nick",username)
             .addOnCompleteListener{
                 if(it.isSuccessful){
-                    result.invoke(UiState.Success("Username has been updated"))
+                    result.invoke(UiState.Success("Username has been updated."))
                 }else{
                     result.invoke((UiState.Failure(it.exception?.message)))
                 }
             }
             .addOnFailureListener{
-                result.invoke(UiState.Failure("Authentication failed"))
+                result.invoke(UiState.Failure("Authentication failed!"))
             }
     }
 
@@ -116,27 +115,21 @@ class AuthRepositoryImp(
         val user = auth.currentUser
         if(user != null){
             auth.signOut()
-            result.invoke(UiState.Success("User has been sign out"))
+            result.invoke(UiState.Success("User has been sign out."))
         }
     }
 
     override fun deleteAccount(result: (UiState<String>) -> Unit) {
-        val user = database.collection(FirestoreCollection.USER).document(
-            auth.currentUser?.uid?:"error")
-
+        val user = database.collection(FirestoreCollection.USER).document(auth.currentUser?.uid?:"error")
         val userAuth = auth.currentUser
 
-        if (user != null){
-            user.delete()
-                .addOnCompleteListener{
-                    userAuth?.delete()
-                    result.invoke(UiState.Success("User has been deleted"))
-                }
-                .addOnFailureListener{
-                    result.invoke(UiState.Failure("Delete operation failed"))
-                }
-        }else{
-            result.invoke(UiState.Failure("Authentication failed"))
-        }
+        user.delete()
+            .addOnCompleteListener{
+                userAuth?.delete()
+                result.invoke(UiState.Success("User has been deleted."))
+            }
+            .addOnFailureListener{
+                result.invoke(UiState.Failure("Deleting operation is failed!"))
+            }
     }
 }

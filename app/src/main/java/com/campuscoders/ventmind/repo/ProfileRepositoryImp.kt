@@ -70,9 +70,19 @@ class ProfileRepositoryImp(
             }
     }
 
-    override fun checkUser(result: (Boolean) -> Unit) {
+    override fun checkUser(userId: String ,result: (Boolean) -> Unit) {
+        /*
         val user = auth.currentUser
         if(user == null) {
+            result.invoke(true)
+        } else {
+            result.invoke(false)
+        }
+
+         */
+        val currentUserId = auth.currentUser?.uid
+        if(userId == currentUserId) {
+            // tıklanılan post'un id'si ile login olan kullanıcının id'si eşit ise
             result.invoke(true)
         } else {
             result.invoke(false)

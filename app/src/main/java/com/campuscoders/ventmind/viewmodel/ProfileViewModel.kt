@@ -53,9 +53,9 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun checkUser() {
+    fun checkUser(userId: String) {
         _checkUser.value = false
-        repository.checkUser {
+        repository.checkUser(userId) {
             _checkUser.value = it
         }
     }
