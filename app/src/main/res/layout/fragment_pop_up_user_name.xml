@@ -28,29 +28,27 @@
         android:id="@+id/changeUserName"
         android:layout_width="100dp"
         android:layout_height="48dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/custom_button"
         android:text="Accept"
         android:textAllCaps="false"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/changeUserNameCancel"
-        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUsername"
         app:layout_constraintStart_toStartOf="@+id/editTextRegisterUsername"
         app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUsername" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/changeUserNameCancel"
-        android:layout_width="50dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="28dp"
-        android:background="#fff"
-        android:text="X"
-        android:textAllCaps="false"
-        android:textColor="#f00"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextRegisterUsername"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegisterUsername" />
+    <ProgressBar
+        android:id="@+id/progressPopUpUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:indeterminateTint="@color/black"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/changeUserName"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="@+id/changeUserName"
+        app:layout_constraintTop_toBottomOf="@+id/changeUserName"></ProgressBar>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

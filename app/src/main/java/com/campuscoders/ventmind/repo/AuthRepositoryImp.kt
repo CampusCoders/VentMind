@@ -99,7 +99,7 @@ class AuthRepositoryImp(
             auth.currentUser?.uid ?: "error"
         )
 
-        document.update("username",username)
+        document.update("user_nick",username)
             .addOnCompleteListener{
                 if(it.isSuccessful){
                     result.invoke(UiState.Success("Username has been updated"))
@@ -126,14 +126,14 @@ class AuthRepositoryImp(
 
         if (user != null){
             user.delete()
-                .addOnSuccessListener {
-                    UiState.Success("User has been deleted")
+                .addOnCompleteListener{
+                    result.invoke(UiState.Success("User has been deleted"))
                 }
                 .addOnFailureListener{
-                    UiState.Failure("Delete operation failed")
+                    result.invoke(UiState.Failure("Delete operation failed"))
                 }
         }else{
-            UiState.Failure("Authentication failed")
+            result.invoke(UiState.Failure("Authentication failed"))
         }
     }
 }

@@ -21,8 +21,6 @@ class PopUpUserNameFragment : DialogFragment(){
     private var _binding: FragmentPopUpUserNameBinding? = null
     private val binding get() = _binding!!
 
-    private var _bindingt:FragmentSettingsBinding?=null
-    private val bindingt get() = _bindingt!!
     val viewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -34,13 +32,13 @@ class PopUpUserNameFragment : DialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observer()
+
         binding.changeUserName.setOnClickListener{
             if (validation())
             {
                 viewModel.updateUsernameFun(binding.editTextRegisterUsername.text.toString())
             }
-        }
-        binding.changeUserNameCancel.setOnClickListener{
             dismiss()
         }
     }
@@ -49,15 +47,14 @@ class PopUpUserNameFragment : DialogFragment(){
         viewModel.updateUsername.observe(viewLifecycleOwner) {state ->
             when(state) {
                 is UiState.Loading -> {
-                    bindingt.progressBarSettings.show()
+                    binding.progressPopUpUserName.show()
                 }
                 is UiState.Success -> {
-                    bindingt.progressBarSettings.hide()
+                    binding.progressPopUpUserName.hide()
                     toast(state.data)
-                    dismiss()
                 }
                 is UiState.Failure -> {
-                    bindingt.progressBarSettings.hide()
+                    binding.progressPopUpUserName.hide()
                     toast(state.error!!)
                 }
             }
