@@ -8,5 +8,5 @@ interface ProfileRepository {
     fun getUser(userId: String, result: (UiState<User>) -> Unit)
     fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit)
     fun setUserBio(bio: String, result: (UiState<String>) -> Unit)
-    fun checkUser(result: (UiState<Boolean>) -> Unit)
+    fun checkUser(result: (UiState<String>) -> Unit)
 }

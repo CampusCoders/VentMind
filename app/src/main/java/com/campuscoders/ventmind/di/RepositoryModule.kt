@@ -27,7 +27,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideProfileRepository(database: FirebaseFirestore): ProfileRepository {
-        return ProfileRepositoryImp(database)
+    fun provideProfileRepository(database: FirebaseFirestore, auth: FirebaseAuth): ProfileRepository {
+        return ProfileRepositoryImp(database,auth)
     }
 }

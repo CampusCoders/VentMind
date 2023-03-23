@@ -50,6 +50,10 @@ class ProfileFragment: Fragment() {
         binding.recyclerViewProfile.adapter = feedAdapter
         binding.recyclerViewProfile.layoutManager = LinearLayoutManager(requireContext())
 
+        binding.imageViewProfileEditIcon.setOnClickListener {
+            viewModel.setBio(binding.editTextProfileBio.text.toString())
+        }
+
         val userId = arguments?.getString("user_id",null)
         userId?.let {
             viewModel.getUser(it)
@@ -69,7 +73,7 @@ class ProfileFragment: Fragment() {
                     binding.progressBarProfile.hide()
                     binding.textViewProfileUserName.text = state.data.user_nick
                     binding.textViewProfileScore.text = state.data.user_score.toString()
-                    binding.textViewProfileBio.text = state.data.user_bio
+                    binding.editTextProfileBio.setText(state.data.user_bio)
                     // avatar
                 }
                 is UiState.Failure -> {
@@ -87,6 +91,35 @@ class ProfileFragment: Fragment() {
                     binding.progressBarProfile.hide()
                     // recycler view
                     feedAdapter.updateList(state.data.toMutableList())
+                }
+                is UiState.Failure -> {
+                    binding.progressBarProfile.hide()
+                    toast(state.error!!)
+                }
+            }
+        }
+        viewModel.bio.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarProfile.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarProfile.hide()
+                }
+                is UiState.Failure -> {
+                    binding.progressBarProfile.hide()
+                    toast(state.error!!)
+                }
+            }
+        }
+        viewModel.checkUser.observe(viewLifecycleOwner) { state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarProfile.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarProfile.hide()
+                    binding.imageViewProfileEditIcon.hide()
                 }
                 is UiState.Failure -> {
                     binding.progressBarProfile.hide()

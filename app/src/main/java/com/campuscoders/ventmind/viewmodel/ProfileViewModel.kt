@@ -24,6 +24,12 @@ class ProfileViewModel @Inject constructor(
         get() = _post
 
     private val _bio = MutableLiveData<UiState<String>>()
+    val bio: LiveData<UiState<String>>
+        get() = _bio
+
+    private val _checkUser = MutableLiveData<UiState<String>>()
+    val checkUser: LiveData<UiState<String>>
+        get() = _checkUser
 
 
     fun getUser(userId: String) {
@@ -37,6 +43,20 @@ class ProfileViewModel @Inject constructor(
         _post.value = UiState.Loading
         repository.getUserPosts(userId) {
             _post.value = it
+        }
+    }
+
+    fun setBio(bio: String) {
+        _bio.value = UiState.Loading
+        repository.setUserBio(bio) {
+            _bio.value = it
+        }
+    }
+
+    fun checkUser() {
+        _checkUser.value = UiState.Loading
+        repository.checkUser {
+            _checkUser.value = it
         }
     }
 }

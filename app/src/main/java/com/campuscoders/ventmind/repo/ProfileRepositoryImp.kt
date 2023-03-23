@@ -4,10 +4,12 @@ import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileRepositoryImp(
-    val database: FirebaseFirestore
+    val database: FirebaseFirestore,
+    val auth: FirebaseAuth
 ): ProfileRepository {
 
     override fun getUser(userId: String, result: (UiState<User>) -> Unit) {
@@ -52,10 +54,25 @@ class ProfileRepositoryImp(
     }
 
     override fun setUserBio(bio: String, result: (UiState<String>) -> Unit) {
-
+        val userId = auth.currentUser
+        val document = database.collection(FirestoreCollection.USER).document(userId.toString())
+        document.update("user_bio",bio)
+            .addOnSuccessListener {
+                result.invoke(
+                    UiState.Success("Bio has been updated")
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
+            }
     }
 
-    override fun checkUser(result: (UiState<Boolean>) -> Unit) {
-        TODO("Not yet implemented")
+    override fun checkUser(result: (UiState<String>) -> Unit) {
+        auth.currentUser?.let {
+            result.invoke(UiState.Success("true"))
+        }
+        result.invoke(UiState.Failure("another user"))
     }
 }
