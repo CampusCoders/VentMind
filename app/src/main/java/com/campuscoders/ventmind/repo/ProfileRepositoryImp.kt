@@ -71,9 +71,11 @@ class ProfileRepositoryImp(
     }
 
     override fun checkUser(result: (Boolean) -> Unit) {
-        auth.currentUser?.let {
+        val user = auth.currentUser
+        if(user == null) {
+            result.invoke(true)
+        } else {
             result.invoke(false)
         }
-        result.invoke(true)
     }
 }

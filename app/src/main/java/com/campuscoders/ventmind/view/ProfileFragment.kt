@@ -135,7 +135,8 @@ class ProfileFragment: Fragment() {
                 binding.imageViewProfileUpdateIcon.hide()
             } else {
                 // başka birinin profil ekranı
-                binding.linearEdit.hide()
+                binding.imageViewProfileEditIcon.hide()
+                binding.imageViewProfileUpdateIcon.hide()
             }
         }
     }
