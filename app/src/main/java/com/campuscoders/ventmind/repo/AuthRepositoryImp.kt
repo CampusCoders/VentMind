@@ -124,9 +124,12 @@ class AuthRepositoryImp(
         val user = database.collection(FirestoreCollection.USER).document(
             auth.currentUser?.uid?:"error")
 
+        val userAuth = auth.currentUser
+
         if (user != null){
             user.delete()
                 .addOnCompleteListener{
+                    userAuth?.delete()
                     result.invoke(UiState.Success("User has been deleted"))
                 }
                 .addOnFailureListener{
