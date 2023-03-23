@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class CreatePostRepositoryImp(
     val database: FirebaseFirestore,
-    val auth: FirebaseAuth
+    val auth: FirebaseAuth,
 ): CreatePostRepository {
 
     override fun getUser(userId:String ,result: (UiState<User>) -> Unit) {
@@ -35,7 +35,7 @@ class CreatePostRepositoryImp(
     }
 
     override fun addPostFeed(post: PostFeed, result: (UiState<String>) -> Unit) {
-       // post.post_user_id = auth.currentUser.uid
+        post.post_user_id = auth.currentUser!!.uid
         database.collection(FirestoreCollection.POST_FEED).add(post)
             .addOnCompleteListener {
                 if (it.isSuccessful){
@@ -50,6 +50,7 @@ class CreatePostRepositoryImp(
     }
 
     override fun addPostExp(post: PostExp, result: (UiState<String>) -> Unit) {
+        post.post_user_id = auth.currentUser!!.uid
         database.collection(FirestoreCollection.POST_EXP).add(post)
             .addOnCompleteListener {
                 if (it.isSuccessful){

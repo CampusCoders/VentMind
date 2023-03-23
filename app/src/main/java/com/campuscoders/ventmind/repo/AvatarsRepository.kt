@@ -6,5 +6,5 @@ import com.campuscoders.ventmind.util.UiState
 
 interface AvatarsRepository {
     fun getAvatars(result: (UiState<List<Avatar>>) -> Unit)
-    fun getUserScore(result: (UiState<User>) -> Unit)
+    fun getUserScore(result: (UiState<Int>) -> Unit)
 }
