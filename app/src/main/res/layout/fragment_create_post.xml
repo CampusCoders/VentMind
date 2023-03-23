@@ -91,6 +91,7 @@
             android:padding="8dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/tag"
                 android:layout_width="104dp"
                 android:layout_height="48dp"
                 android:text="Select Tag"
@@ -148,5 +149,15 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarCreatePost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"></ProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

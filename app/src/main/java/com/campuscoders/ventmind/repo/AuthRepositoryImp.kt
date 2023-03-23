@@ -112,14 +112,15 @@ class AuthRepositoryImp(
             }
     }
 
-    override fun logOut() {
+    override fun logOut(result: (UiState<String>) -> Unit) {
         val user = auth.currentUser
         if(user != null){
             auth.signOut()
+            result.invoke(UiState.Success("User has been sign out"))
         }
     }
 
-    override fun deleteAccount() {
+    override fun deleteAccount(result: (UiState<String>) -> Unit) {
         val user = database.collection(FirestoreCollection.USER).document(
             auth.currentUser?.uid?:"error")
 

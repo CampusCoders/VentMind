@@ -7,7 +7,7 @@ data class PostExp(
     @ServerTimestamp
     val created_at : Date? = Date(),
     val post_avatar: String? = "",
-    val post_comment_count: Int? = 0,
+    val post_like_count: Int? = 0,
     val post_content: String? = "",
     val post_dislike_count: Int? = 0,
     val post_nick: String? = "",
