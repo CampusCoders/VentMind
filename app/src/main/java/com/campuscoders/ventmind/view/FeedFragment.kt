@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.adapter.FeedAdapter
 import com.campuscoders.ventmind.databinding.FragmentFeedBinding
+import com.campuscoders.ventmind.model.LikeFeed
+import com.campuscoders.ventmind.repo.FeedRepositoryImp
 import com.campuscoders.ventmind.util.UiState
 import com.campuscoders.ventmind.util.hide
 import com.campuscoders.ventmind.util.show
@@ -24,6 +26,7 @@ class FeedFragment: Fragment() {
     private var _binding: FragmentFeedBinding? = null
     private val binding get() = _binding!!
 
+    var postUserId =""
     val viewModel: FeedViewModel by viewModels()
     val feedAdapter by lazy {
         FeedAdapter(
@@ -40,6 +43,10 @@ class FeedFragment: Fragment() {
                 })
             },
             likeOnItemClickListener = {
+                postUserId=it
+                viewModel.checkLike(postUserId)
+
+
                 toast(it)
             },
             commentOnItemClickListener = {
@@ -67,6 +74,7 @@ class FeedFragment: Fragment() {
         binding.fabFeed.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
         }
+
     }
 
     private fun observer() {
@@ -84,10 +92,42 @@ class FeedFragment: Fragment() {
                 }
             }
         }
+        viewModel.checklike.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarFeed.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarFeed.hide()
+                    if (state.data){
+                        viewModel.liked(createLiked())
+                    }
+                }
+                is UiState.Failure -> {
+                    binding.progressBarFeed.hide()
+
+                }
+            }
+        }
+    }
+
+    private fun createLiked():LikeFeed{
+        return LikeFeed(
+            postUserId
+        )
+    }
+
+    private fun validation():Boolean{
+        var isValid=true
+
+        return isValid
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
+
 }

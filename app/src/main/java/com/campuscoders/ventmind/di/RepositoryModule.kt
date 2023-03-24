@@ -21,8 +21,8 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideFeedRepository(database: FirebaseFirestore): FeedRepository {
-        return FeedRepositoryImp(database)
+    fun provideFeedRepository(database: FirebaseFirestore, auth: FirebaseAuth): FeedRepository {
+        return FeedRepositoryImp(database, auth)
     }
 
     @Provides
