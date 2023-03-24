@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.campuscoders.ventmind.databinding.FragmentCreatePostBinding
 import com.campuscoders.ventmind.model.PostExp
 import com.campuscoders.ventmind.model.PostFeed
@@ -36,9 +37,9 @@ class CreatePostFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observer()
-
         viewModel.getUser()
+
+        observer()
 
         binding.buttonShareFeeling.setOnClickListener {
             if(validation()) {
@@ -61,10 +62,12 @@ class CreatePostFragment: Fragment() {
                 is UiState.Success -> {
                     binding.progressBarCreatePost.hide()
                     userObj = state.data
+                    binding.textViewCreatePostUsername.text = userObj?.user_nick
+                    // avatar çekme işlemi ...
                 }
                 is UiState.Failure -> {
                     binding.progressBarCreatePost.hide()
-                    toast(state.error ?: "error user")
+                    toast(state.error ?: "error")
                 }
             }
         }
@@ -75,8 +78,8 @@ class CreatePostFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     binding.progressBarCreatePost.hide()
-                    toast("The post has been sent.")
-                    // geri gitme işlemi
+                    toast(state.data)
+                    findNavController().popBackStack()
                 }
                 is UiState.Failure -> {
                     binding.progressBarCreatePost.hide()
@@ -91,6 +94,8 @@ class CreatePostFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     binding.progressBarCreatePost.hide()
+                    toast(state.data)
+                    findNavController().popBackStack()
                 }
                 is UiState.Failure -> {
                     binding.progressBarCreatePost.hide()

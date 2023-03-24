@@ -30,12 +30,9 @@ class CreatePostViewModel @Inject constructor(
 
     fun getUser() {
         _user.value = UiState.Loading
-        /*
         repository.getUser {
             _user.value = it
         }
-
-         */
     }
 
     fun addPostFeed(post: PostFeed) {

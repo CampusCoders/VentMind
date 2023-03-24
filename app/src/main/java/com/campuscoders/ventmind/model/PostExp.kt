@@ -7,7 +7,7 @@ data class PostExp(
     @ServerTimestamp
     var created_at : Date? = Date(),
     var post_avatar: String? = "",
-    var post_comment_count: Int? = 0,
+    var post_like_count: Int? = 0,
     var post_content: String? = "",
     var post_dislike_count: Int? = 0,
     var post_nick: String? = "",

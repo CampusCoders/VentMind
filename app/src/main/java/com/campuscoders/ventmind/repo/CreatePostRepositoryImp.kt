@@ -13,8 +13,8 @@ class CreatePostRepositoryImp(
     val auth: FirebaseAuth,
 ): CreatePostRepository {
 
-    override fun getUser(userId:String ,result: (UiState<User>) -> Unit) {
-        val userId = auth.currentUser
+    override fun getUser(result: (UiState<User>) -> Unit) {
+        val userId = auth.currentUser?.uid
         val document = database.collection(FirestoreCollection.USER).document(userId.toString())
         document.get()
             .addOnSuccessListener {
@@ -24,7 +24,7 @@ class CreatePostRepositoryImp(
                         UiState.Success(user!!)
                     )
                 }else{
-                    result.invoke(UiState.Failure("error"))
+                    result.invoke(UiState.Failure("Failed to fetch user inforöation."))
                 }
             }
             .addOnFailureListener{
@@ -35,17 +35,17 @@ class CreatePostRepositoryImp(
     }
 
     override fun addPostFeed(post: PostFeed, result: (UiState<String>) -> Unit) {
-        post.post_user_id = auth.currentUser!!.uid
+        post.post_user_id = auth.currentUser?.uid
         database.collection(FirestoreCollection.POST_FEED).add(post)
             .addOnCompleteListener {
-                if (it.isSuccessful){
-                    result.invoke(UiState.Success("Post has been added"))
-                }else{
-                    result.invoke(UiState.Failure("Post add operation failed"))
+                if (it.isSuccessful) {
+                    result.invoke(UiState.Success("The post has been sent."))
+                }else {
+                    result.invoke(UiState.Failure("Adding post operation is failed!"))
                 }
             }
-            .addOnFailureListener{
-                result.invoke(UiState.Failure("Post add operation failed"))
+            .addOnFailureListener {
+                result.invoke(UiState.Failure("Adding post operation is failed"))
             }
     }
 
@@ -53,14 +53,14 @@ class CreatePostRepositoryImp(
        post.post_user_id = auth.currentUser!!.uid
         database.collection(FirestoreCollection.POST_EXP).add(post)
             .addOnCompleteListener {
-                if (it.isSuccessful){
-                    result.invoke(UiState.Success("Post has been added"))
-                }else{
-                    result.invoke(UiState.Failure("Post add operation failed"))
+                if (it.isSuccessful) {
+                    result.invoke(UiState.Success("The post has been sent."))
+                } else{
+                    result.invoke(UiState.Failure("Adding post operation is failed!"))
                 }
             }
             .addOnFailureListener{
-                result.invoke(UiState.Failure("Post add operation failed"))
+                result.invoke(UiState.Failure("Adding post operation is failed!"))
             }
     }
 }

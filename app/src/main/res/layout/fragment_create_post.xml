@@ -125,12 +125,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonShareFeeling"
-            android:layout_width="108dp"
+            android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginVertical="12dp"
+            android:padding="12dp"
             android:layout_marginRight="12dp"
             android:background="@drawable/custom_button"
-            android:text="Dert Paylaş"
+            android:text="Share Feeling"
             android:textAllCaps="false"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
@@ -143,7 +144,7 @@
             android:layout_marginLeft="12dp"
             android:background="@drawable/custom_button"
             android:padding="12dp"
-            android:text="Deneyim Paylaş"
+            android:text="Share Experience"
             android:textAllCaps="false"
             android:textColor="@color/text_color"
             android:textSize="16sp" />

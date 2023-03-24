@@ -6,7 +6,7 @@ import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.UiState
 
 interface CreatePostRepository {
-    fun getUser(userId:String,result: (UiState<User>) -> Unit)
+    fun getUser(result: (UiState<User>) -> Unit)
     fun addPostFeed(post: PostFeed, result: (UiState<String>) -> Unit)
     fun addPostExp(post: PostExp, result: (UiState<String>) -> Unit)
 }
