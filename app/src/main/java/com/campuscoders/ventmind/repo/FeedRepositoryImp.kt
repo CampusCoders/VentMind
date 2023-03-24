@@ -39,17 +39,23 @@ class FeedRepositoryImp(
         val userId = auth.currentUser?.uid
         val likeFeedId = userId + postId
 
-        println(likeFeedId)
-
-        val document = database.collection(FirestoreCollection.LIKE_FEED).document(userId?:"")
+        val document = database.collection(FirestoreCollection.LIKE_FEED).document(likeFeedId)
         document.get()
             .addOnSuccessListener {
                 if (it.exists()) {
-                    // like atılmış
-                    result.invoke(UiState.Success(true))
-                } else {
-                    // like atılmamış
 
+                    // like atılmış
+                    // like kaydını siliyoruz ve "true" yollayıp like atıldı bilgisini result ile veriyoruz.
+                    document.delete()
+                        .addOnCompleteListener {
+                            result.invoke(UiState.Success(true))
+                        }
+                        .addOnFailureListener {
+                            result.invoke(UiState.Failure("like feed silme işlemi başarısız."))
+                        }
+                } else {
+
+                    // like atılmamış
                     val likeFeed = LikeFeed(postId,userId)
                     document.set(likeFeed)
                         .addOnCompleteListener {
@@ -106,9 +112,7 @@ class FeedRepositoryImp(
                                         }
                                 }
                             }
-                            is UiState.Failure -> {
-
-                            }
+                            is UiState.Failure -> {}
                         }
                     }
 

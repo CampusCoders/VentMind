@@ -92,7 +92,11 @@ class FeedFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     binding.progressBarFeed.hide()
+                    if(state.data) {
 
+                    } else {
+
+                    }
                 }
                 is UiState.Failure -> {
                     binding.progressBarFeed.hide()
