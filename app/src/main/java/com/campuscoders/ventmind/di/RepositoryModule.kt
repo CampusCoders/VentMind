@@ -13,6 +13,8 @@ import javax.inject.Singleton
 @Module
 object RepositoryModule {
 
+    //viewmodelde kullanmak için oluşturuyoruz
+
     @Provides
     @Singleton
     fun provideAuthRepository(database: FirebaseFirestore, auth: FirebaseAuth): AuthRepository {
@@ -41,5 +43,16 @@ object RepositoryModule {
     @Singleton
     fun provideListRepository(database: FirebaseFirestore): ListRepository {
         return ListRepositoryImp(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideExpRepository(database: FirebaseFirestore, auth: FirebaseAuth):ExpRepository{
+        return ExpRepositoryImp(database,auth)
+    }
+    @Provides
+    @Singleton
+    fun provideAvatarsRepository(database: FirebaseFirestore, auth: FirebaseAuth):AvatarsRepository{
+        return AvatarsRepositoryImp(database,auth)
     }
 }
