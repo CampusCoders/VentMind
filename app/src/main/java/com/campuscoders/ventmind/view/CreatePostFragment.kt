@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.databinding.FragmentCreatePostBinding
 import com.campuscoders.ventmind.model.PostExp
 import com.campuscoders.ventmind.model.PostFeed
@@ -31,6 +33,11 @@ class CreatePostFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentCreatePostBinding.inflate(inflater,container,false)
+
+        val feelings = resources.getStringArray(R.array.feelings)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, feelings)
+        binding.autoCompleteTextView.setAdapter(arrayAdapter)
+
         return binding.root
     }
 
@@ -113,7 +120,7 @@ class CreatePostFragment: Fragment() {
             binding.editTextCreatePostContent.text.toString(),
             0,
             userObj?.user_nick,
-            binding.tag.text.toString(),
+            binding.autoCompleteTextView.text.toString(),
             ""
         )
     }
@@ -126,7 +133,7 @@ class CreatePostFragment: Fragment() {
             binding.editTextCreatePostContent.text.toString(),
             0,
             userObj?.user_nick,
-            binding.tag.text.toString(),
+            binding.autoCompleteTextView.text.toString(),
             ""
         )
     }

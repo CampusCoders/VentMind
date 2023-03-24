@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="feelings">
+        <item>Relationship</item>
+        <item>Work Life</item>
+        <item>Financial Struggles</item>
+        <item>Mental Health</item>
+        <item>Family Issues</item>
+        <item>Anxiety</item>
+        <item>Depression</item>
+        <item>Self-Confidence</item>
+        <item>Grief</item>
+        <item>Health Issues</item>
+        <item>Career</item>
+        <item>Other</item>
+    </string-array>
+</resources>

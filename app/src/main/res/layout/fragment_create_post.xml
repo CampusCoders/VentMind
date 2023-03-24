@@ -68,10 +68,12 @@
             android:id="@+id/editTextCreatePostContent"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:background="@null"
             android:textColor="@color/text_color"
+            android:textColorHint="@color/text_color"
             android:textSize="16sp"
             android:inputType="textImeMultiLine"
             android:hint="Type here ..."></EditText>
@@ -85,21 +87,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/tag"
-                android:layout_width="104dp"
-                android:layout_height="48dp"
-                android:text="Select Tag"
-                android:textAllCaps="false"></androidx.appcompat.widget.AppCompatButton>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/a"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                app:boxBackgroundColor="@color/button_background"
+                app:counterTextColor="@color/text_color"
+                app:counterOverflowTextColor="@color/text_color"
+                android:textColorHint="@color/text_color"
+                app:placeholderTextColor="@color/text_color"
+                android:backgroundTint="@color/button_background"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:inputType="none"
+                    android:padding="8dp"
+                    android:text="Other"
+                    android:textSize="17sp">
+                </AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="48dp"
                 android:gravity="end|center"
                 android:padding="4dp">
 
