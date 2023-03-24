@@ -18,6 +18,8 @@ class FeedAdapter(
 
     private var postFeedList: MutableList<PostFeed> = arrayListOf()
 
+    var controlBool: Boolean? = true
+
     inner class MyViewHolder(val binding: PostFeedBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PostFeed) {
             binding.textViewFeedPostUsername.text = item.post_nick
@@ -26,14 +28,25 @@ class FeedAdapter(
             binding.textViewFeedCommentCount.text = item.post_comment_count.toString()
             binding.textViewFeedPostContent.text = item.post_content
             binding.textViewFeedPostDate.text = item.created_at?.let { sdf.format(it) }
-
+            var likeCount = item.post_like_count
             // clickListeners:
             binding.imageViewFeedPostAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.post_user_id ?: "") }
             binding.textViewFeedPostUsername.setOnClickListener { usernameOnItemClickListener.invoke(item.post_user_id ?: "") }
             binding.imageViewFeedLike.setOnClickListener {
                 likeOnItemClickListener.invoke(item.post_id ?: "")
-
-
+                if(controlBool != null) {
+                    if(controlBool!!) {
+                        if (likeCount != null) {
+                            likeCount++
+                            binding.textViewFeedLikeCount.text = likeCount.toString()
+                        }
+                    } else {
+                        if (likeCount != null) {
+                            likeCount--
+                            binding.textViewFeedLikeCount.text = likeCount.toString()
+                        }
+                    }
+                }
             }
             binding.imageViewFeedComments.setOnClickListener { commentOnItemClickListener.invoke(item.post_id ?: "") }
         }
@@ -46,6 +59,10 @@ class FeedAdapter(
 
     override fun getItemCount(): Int {
         return postFeedList.size
+    }
+
+    fun updateLikeCount(control: Boolean) {
+        this.controlBool = control
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
