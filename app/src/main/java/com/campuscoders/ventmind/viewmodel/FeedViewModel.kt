@@ -24,4 +24,5 @@ class FeedViewModel @Inject constructor(
             _posts.value = it
         }
     }
+
 }

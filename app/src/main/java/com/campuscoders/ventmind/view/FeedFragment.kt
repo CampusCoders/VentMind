@@ -67,6 +67,7 @@ class FeedFragment: Fragment() {
         binding.fabFeed.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
         }
+
     }
 
     private fun observer() {
@@ -84,7 +85,34 @@ class FeedFragment: Fragment() {
                 }
             }
         }
+
+        /*
+        viewModel.checklike.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarFeed.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarFeed.hide()
+                }
+                is UiState.Failure -> {
+                    binding.progressBarFeed.hide()
+
+                }
+            }
+        }
+
+         */
     }
+
+    /*
+    private fun validation(): Boolean {
+        var isValid=true
+
+        return isValid
+    }
+
+     */
 
     override fun onDestroyView() {
         super.onDestroyView()

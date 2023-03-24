@@ -121,6 +121,7 @@ class CreatePostFragment: Fragment() {
             0,
             userObj?.user_nick,
             binding.autoCompleteTextView.text.toString(),
+            "",
             ""
         )
     }
@@ -134,6 +135,7 @@ class CreatePostFragment: Fragment() {
             0,
             userObj?.user_nick,
             binding.autoCompleteTextView.text.toString(),
+            "",
             ""
         )
     }

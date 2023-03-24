@@ -7,5 +7,5 @@ interface FeedRepository {
     fun getPosts(result: (UiState<List<PostFeed>>) -> Unit)
     fun getPosts(feeling: String, result: (UiState<List<PostFeed>>) -> Unit)
     fun checkLike(postId: String, result: (UiState<Boolean>) -> Unit)
-    fun updatePostFeedLike(postId: String, result: (UiState<String>) -> Unit)
+    fun updateLikeCount(postId: String, result: (UiState<String>) -> Unit)
 }
