@@ -2,7 +2,6 @@ package com.campuscoders.ventmind.repo
 
 import com.campuscoders.ventmind.model.LikeFeed
 import com.campuscoders.ventmind.model.PostFeed
-import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
 import com.google.firebase.auth.FirebaseAuth
@@ -12,6 +11,7 @@ class FeedRepositoryImp(
     val database: FirebaseFirestore,
     val auth: FirebaseAuth,
 ): FeedRepository {
+
     override fun getPosts(result: (UiState<List<PostFeed>>) -> Unit) {
         database.collection(FirestoreCollection.POST_FEED).get()
             .addOnSuccessListener {
@@ -36,26 +36,28 @@ class FeedRepositoryImp(
     }
 
     override fun checkLike(postId: String, result: (UiState<Boolean>) -> Unit) {
-        // kullanıcı id'si ile alınan postId birleştirilip LikeFeed'de arama yapılır. Sonuca göre boolean ifade döndürür.
-        val userId=auth.currentUser?.uid
-        var controller =false
-        database.collection(FirestoreCollection.LIKE_FEED).get()
+        val userId = auth.currentUser?.uid
+        val likeFeedId = userId + postId
+
+        println(likeFeedId)
+
+        val document = database.collection(FirestoreCollection.LIKE_FEED).document(userId?:"")
+        document.get()
             .addOnSuccessListener {
-                val likeFeedList = arrayListOf<LikeFeed>()
-                for (document in it){
-                    val likeFeed=document.toObject(LikeFeed::class.java)
-                    likeFeedList.add(likeFeed)
-                }
-                for (like in likeFeedList){
-                    if (like.user_id==userId && like.post_id==postId){
-                        controller=true
-                        break
-                    }
-                }
-                if (controller){
-                    result.invoke(UiState.Success(false))
-                }else {
+                if (it.exists()) {
+                    // like atılmış
                     result.invoke(UiState.Success(true))
+                } else {
+                    // like atılmamış
+
+                    val likeFeed = LikeFeed(postId,userId)
+                    document.set(likeFeed)
+                        .addOnCompleteListener {
+                            result.invoke(UiState.Success(false))
+                        }
+                        .addOnFailureListener {
+                            result.invoke(UiState.Failure("Adding FeedLike error"))
+                        }
                 }
             }
             .addOnFailureListener {
@@ -63,22 +65,60 @@ class FeedRepositoryImp(
             }
     }
 
-    override fun updatePostFeedLike(postId: String, result: (UiState<String>) -> Unit) {
-        // checkLike'ın boolean sonucuna göre PostFeed'de "post_like_count" değeri arttırılır veya azaltılır.
-    }
-    override fun liked(liked:LikeFeed,result: (UiState<String>) -> Unit) {
-        liked.user_id=auth.currentUser?.uid
-        database.collection(FirestoreCollection.LIKE_FEED).add(liked)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    result.invoke(UiState.Success("The liked has been sent."))
+    override fun updateLikeCount(postId: String, result: (UiState<String>) -> Unit) {
+        val document = database.collection(FirestoreCollection.POST_FEED).document(postId)
+        document.get()
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    val postFeed = it.toObject(PostFeed::class.java)
+                    var likeCount = postFeed?.post_like_count
+                    // check user'a göre arttırma azaltma
+                    checkLike(postId) {state ->
+                        when(state) {
+                            is UiState.Loading -> {}
+                            is UiState.Success -> {
+                                if(state.data) {    // like atılmış
 
-                }else{
-                    result.invoke(UiState.Failure("Adding liked operation is failed"))
+                                    // like azaltıldı
+                                    if(likeCount != null) { likeCount-- }
+
+                                    // postFeed güncelleme
+                                    document.update("post_like_count", likeCount)
+                                        .addOnCompleteListener {
+                                            result.invoke(UiState.Success("Like count has been reduced"))
+                                        }
+                                        .addOnFailureListener {
+                                            result.invoke(UiState.Failure("Like count process error"))
+                                        }
+
+                                } else {    // like atılmamış
+
+                                    // like arttırıldı
+                                    if(likeCount != null) { likeCount++ }
+
+                                    // postFeed güncelleme
+                                    document.update("post_like_count", likeCount)
+                                        .addOnCompleteListener {
+                                            result.invoke(UiState.Success("Like count has been increased"))
+                                        }
+                                        .addOnFailureListener {
+                                            result.invoke(UiState.Failure("Like count process error"))
+                                        }
+                                }
+                            }
+                            is UiState.Failure -> {
+
+                            }
+                        }
+                    }
+
+                } else {
+                    result.invoke(UiState.Failure("ERROR!!!"))
                 }
             }
             .addOnFailureListener {
-                result.invoke((UiState.Failure("Adding liked operation is failed")))
+
             }
     }
+
 }

@@ -12,5 +12,6 @@ data class PostExp(
     var post_dislike_count: Int? = 0,
     var post_nick: String? = "",
     var post_tag: String? = "",
-    var post_user_id: String? = ""
+    var post_user_id: String? = "",
+    var post_id: String? = ""
 )

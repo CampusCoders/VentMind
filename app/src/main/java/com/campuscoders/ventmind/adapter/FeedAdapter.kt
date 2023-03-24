@@ -29,8 +29,8 @@ class FeedAdapter(
             // clickListeners:
             binding.imageViewFeedPostAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.post_user_id ?: "") }
             binding.textViewFeedPostUsername.setOnClickListener { usernameOnItemClickListener.invoke(item.post_user_id ?: "") }
-            binding.imageViewFeedLike.setOnClickListener { likeOnItemClickListener.invoke(item.post_user_id ?: "") }
-            binding.imageViewFeedComments.setOnClickListener { commentOnItemClickListener.invoke(item.post_user_id ?: "") }
+            binding.imageViewFeedLike.setOnClickListener { likeOnItemClickListener.invoke(item.post_id ?: "") }
+            binding.imageViewFeedComments.setOnClickListener { commentOnItemClickListener.invoke(item.post_id ?: "") }
         }
     }
 
