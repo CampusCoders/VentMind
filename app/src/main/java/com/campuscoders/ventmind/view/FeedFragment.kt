@@ -93,8 +93,10 @@ class FeedFragment: Fragment() {
                 is UiState.Success -> {
                     binding.progressBarFeed.hide()
                     if(state.data) {
+                        // like'ı bir arttır
 
                     } else {
+                        // like'ı bir azalt
 
                     }
                 }

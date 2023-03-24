@@ -26,10 +26,15 @@ class FeedAdapter(
             binding.textViewFeedCommentCount.text = item.post_comment_count.toString()
             binding.textViewFeedPostContent.text = item.post_content
             binding.textViewFeedPostDate.text = item.created_at?.let { sdf.format(it) }
+
             // clickListeners:
             binding.imageViewFeedPostAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.post_user_id ?: "") }
             binding.textViewFeedPostUsername.setOnClickListener { usernameOnItemClickListener.invoke(item.post_user_id ?: "") }
-            binding.imageViewFeedLike.setOnClickListener { likeOnItemClickListener.invoke(item.post_id ?: "") }
+            binding.imageViewFeedLike.setOnClickListener {
+                likeOnItemClickListener.invoke(item.post_id ?: "")
+
+
+            }
             binding.imageViewFeedComments.setOnClickListener { commentOnItemClickListener.invoke(item.post_id ?: "") }
         }
     }
