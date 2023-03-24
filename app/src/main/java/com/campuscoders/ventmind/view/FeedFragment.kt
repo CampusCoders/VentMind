@@ -40,7 +40,7 @@ class FeedFragment: Fragment() {
                 })
             },
             likeOnItemClickListener = {
-                toast(it)
+                viewModel.updatePostCount(it)
             },
             commentOnItemClickListener = {
                 toast(it)
@@ -71,7 +71,7 @@ class FeedFragment: Fragment() {
     }
 
     private fun observer() {
-        viewModel.posts.observe(viewLifecycleOwner) {state ->
+        viewModel.posts.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is UiState.Loading -> {
                     binding.progressBarFeed.show()
@@ -85,34 +85,22 @@ class FeedFragment: Fragment() {
                 }
             }
         }
-
-        /*
-        viewModel.checklike.observe(viewLifecycleOwner) {state ->
+        viewModel.updatePost.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is UiState.Loading -> {
                     binding.progressBarFeed.show()
                 }
                 is UiState.Success -> {
                     binding.progressBarFeed.hide()
+
                 }
                 is UiState.Failure -> {
                     binding.progressBarFeed.hide()
-
                 }
             }
         }
-
-         */
     }
 
-    /*
-    private fun validation(): Boolean {
-        var isValid=true
-
-        return isValid
-    }
-
-     */
 
     override fun onDestroyView() {
         super.onDestroyView()

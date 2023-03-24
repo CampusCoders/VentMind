@@ -18,10 +18,21 @@ class FeedViewModel @Inject constructor(
     val posts: LiveData<UiState<List<PostFeed>>>
         get() = _posts
 
+    private val _updatePost = MutableLiveData<UiState<Boolean>>()
+    val updatePost: LiveData<UiState<Boolean>>
+        get() = _updatePost
+
     fun getPosts() {
         _posts.value = UiState.Loading
         repository.getPosts {
             _posts.value = it
+        }
+    }
+
+    fun updatePostCount(postId: String) {
+        _updatePost.value = UiState.Loading
+        repository.updateLikeCount(postId) {
+            _updatePost.value = it
         }
     }
 

@@ -65,7 +65,7 @@ class FeedRepositoryImp(
             }
     }
 
-    override fun updateLikeCount(postId: String, result: (UiState<String>) -> Unit) {
+    override fun updateLikeCount(postId: String, result: (UiState<Boolean>) -> Unit) {
         val document = database.collection(FirestoreCollection.POST_FEED).document(postId)
         document.get()
             .addOnSuccessListener {
@@ -85,7 +85,7 @@ class FeedRepositoryImp(
                                     // postFeed güncelleme
                                     document.update("post_like_count", likeCount)
                                         .addOnCompleteListener {
-                                            result.invoke(UiState.Success("Like count has been reduced"))
+                                            result.invoke(UiState.Success(false))
                                         }
                                         .addOnFailureListener {
                                             result.invoke(UiState.Failure("Like count process error"))
@@ -99,7 +99,7 @@ class FeedRepositoryImp(
                                     // postFeed güncelleme
                                     document.update("post_like_count", likeCount)
                                         .addOnCompleteListener {
-                                            result.invoke(UiState.Success("Like count has been increased"))
+                                            result.invoke(UiState.Success(true))
                                         }
                                         .addOnFailureListener {
                                             result.invoke(UiState.Failure("Like count process error"))
