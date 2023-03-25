@@ -25,7 +25,7 @@ class FeedFragment: Fragment() {
     private val binding get() = _binding!!
 
     val viewModel: FeedViewModel by viewModels()
-    val feedAdapter by lazy {
+    private val feedAdapter by lazy {
         FeedAdapter(
             avatarOnItemClickListener = {
                 // profil ekranına gider
@@ -106,7 +106,6 @@ class FeedFragment: Fragment() {
             }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
