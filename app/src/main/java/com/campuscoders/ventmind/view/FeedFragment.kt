@@ -40,10 +40,14 @@ class FeedFragment: Fragment() {
                 })
             },
             likeOnItemClickListener = {
+                // like sayısı güncellenir
                 viewModel.updatePostCount(it)
             },
             commentOnItemClickListener = {
-                toast(it)
+                // CommentsFragment'a gider
+                findNavController().navigate(R.id.action_feedFragment_to_commentsFragment, Bundle().apply {
+                    putString("post_id",it)
+                })
             }
         )
     }

@@ -15,9 +15,9 @@ class CommentsViewModel @Inject constructor(
     private val repository : CommentsRepository
 ): ViewModel() {
 
-    private val _comment = MutableLiveData<UiState<String>>()
+    private val _setComment = MutableLiveData<UiState<String>>()
     val comment : LiveData<UiState<String>>
-        get() = _comment
+        get() = _setComment
 
     private val _rootPost = MutableLiveData<UiState<PostFeed>>()
     val rootPost : LiveData<UiState<PostFeed>>
@@ -31,10 +31,14 @@ class CommentsViewModel @Inject constructor(
     val updateCommentCount : LiveData<UiState<String>>
         get() = _updateCommentCount
 
+    private val _comments = MutableLiveData<UiState<List<Comment>>>()
+    val comments: LiveData<UiState<List<Comment>>>
+        get() = _comments
+
     fun setCommentFun(comment: Comment){
-        _comment.value = UiState.Loading
+        _setComment.value = UiState.Loading
         repository.setComment(comment){
-            _comment.value = it
+            _setComment.value = it
         }
     }
 
@@ -45,7 +49,7 @@ class CommentsViewModel @Inject constructor(
         }
     }
 
-    fun awardFun(commentId: String, postId:String){
+    fun giveAwardFun(commentId: String, postId:String){
         _award.value = UiState.Loading
         repository.giveAward(commentId,postId){
             _award.value = it
@@ -56,6 +60,13 @@ class CommentsViewModel @Inject constructor(
         _updateCommentCount.value = UiState.Loading
         repository.increaseCommentCount(postId){
             _updateCommentCount.value = it
+        }
+    }
+
+    fun getCommentsFun(postId: String) {
+        _comments.value = UiState.Loading
+        repository.getComments(postId) {
+            _comments.value = it
         }
     }
 }

@@ -2,6 +2,7 @@ package com.campuscoders.ventmind.repo
 
 import com.campuscoders.ventmind.model.Comment
 import com.campuscoders.ventmind.model.PostFeed
+import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
 import com.google.firebase.auth.FirebaseAuth
@@ -38,38 +39,92 @@ class CommentsRepositoryImp(
             }
     }
 
-    override fun checkOwnPost(postUserId: String, result: (UiState<Boolean>) -> Unit) {
+    override fun checkOwnPost(postUserId: String, result: (Boolean) -> Unit) {
         // "post_user_id" ile auth.currentUser karşılaştırılır ve sonuç boolean döner.
         // kullanıcı kendi postuna mı bakıyor kontrol edilir.
-        // eğer true(kullanıcı kendi postuna bakıyor) ise; comment'lerin sol köşelerinde boş ödül ikonları gözükür.
-        if(postUserId.equals(auth.currentUser!!.uid)){
-            result.invoke(UiState.Success(true))
-        }else{
-            result.invoke(UiState.Success(false))
+        val currentUserId = auth.currentUser?.uid
+        if(currentUserId == postUserId) {
+            result.invoke(true)
+        } else {
+            result.invoke(false)
         }
     }
 
-    override fun giveAward(commentId: String,postId: String, result: (UiState<Boolean>) -> Unit) {
-        this.checkOwnPost(postId){
-            when(it){
-                is UiState.Loading -> {}
-                is UiState.Success -> {
-                    if(it.data){
-                        database.collection(FirestoreCollection.COMMENT).document(commentId)
-                            .update("comment_award",true)
-                            .addOnSuccessListener {
-                                result.invoke(UiState.Success(true))  //comment_award , true olarak güncellendi
+    override fun giveAward(commentId: String, postId: String, result: (UiState<Boolean>) -> Unit) {
+
+        checkOwnPost(postId) {
+            if(it) {
+                // kendi postu
+                // tıklanılan comment çekilir
+                val document = database.collection(FirestoreCollection.COMMENT).document(commentId)
+                document.get()
+                    .addOnSuccessListener {
+                        if (it.exists()) {
+                            // comment objesi alınır
+                            val comment = it.toObject(Comment::class.java)
+                            var awardControl = comment?.comment_award
+                            val commentUserId = comment?.comment_user_id
+                            if(awardControl != null) {
+                                // eğer ödül verilmişse(true) awardControl'a false atanır
+                                // eğer ödül verilmemişse(false) awardControl'a true atanır.
+                                awardControl = !awardControl
+
+                                // comment'in ödül bilgisi güncellenir.
+                                document.update("comment_award",awardControl)
+
+                                // awardControl'e göre userScore arttırılır.
+                                updateUserScore(commentUserId?:"", awardControl) { state ->
+                                    when(state) {
+                                        is UiState.Loading -> {}
+                                        is UiState.Success -> {
+                                            result.invoke(UiState.Success(awardControl))
+                                        }
+                                        is UiState.Failure -> {
+                                            result.invoke(
+                                                UiState.Failure(state.error)
+                                            )
+                                        }
+                                    }
+                                }
                             }
-                            .addOnFailureListener {
-                                result.invoke(UiState.Success(false))
-                            }
-                    }else{
-                        result.invoke(UiState.Success(false))
+                        } else {
+                            result.invoke(
+                                UiState.Failure("comment not found")
+                            )
+                        }
                     }
-                }
-                is UiState.Failure ->{}
+                    .addOnFailureListener { error ->
+                        result.invoke(
+                            UiState.Failure(error.localizedMessage)
+                        )
+                    }
             }
         }
+    }
+
+    override fun updateUserScore(userId: String, control: Boolean, result: (UiState<String>) -> Unit) {
+        // İlk önce user verisi çekilir ve userScore alınır.
+        // parametre olarak alınan boolean'a göre userScore arttırılır veya azaltılır
+        val document = database.collection(FirestoreCollection.USER).document(userId)
+        document.get()
+            .addOnSuccessListener {
+                val user = it.toObject(User::class.java)
+                var userScore = user?.user_score
+                if(control) {
+                    userScore?.let {
+                        userScore + 100
+                    }
+                    result.invoke(UiState.Success("UserScore has been increased."))
+                } else {
+                    userScore?.let {
+                        userScore - 100
+                    }
+                    result.invoke(UiState.Success("UserScore has been reduced."))
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
     }
 
     override fun increaseCommentCount(postId: String, result: (UiState<String>) -> Unit) {
@@ -83,6 +138,26 @@ class CommentsRepositoryImp(
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
+            }
+    }
+
+    override fun getComments(postId: String, result: (UiState<List<Comment>>) -> Unit) {
+        // PostFeed'e bağlı ilgili comment'ler çekilir.
+        database.collection(FirestoreCollection.COMMENT).whereEqualTo("comment_rootpost_id",postId).get()
+            .addOnSuccessListener {
+                val commentList = arrayListOf<Comment>()
+                for(document in it) {
+                    val comment = document.toObject(Comment::class.java)
+                    commentList.add(comment)
+                }
+                result.invoke(
+                    UiState.Success(commentList)
+                )
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
             }
     }
 }
