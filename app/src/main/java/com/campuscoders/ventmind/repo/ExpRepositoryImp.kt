@@ -45,7 +45,6 @@ class ExpRepositoryImp(
         // kullanıcı id'si ile alınan postId birleştirilip LikeExp'de arama yapılır. Sonuca göre boolean ifade döndürür.
         val userId = auth.currentUser!!.uid
         val userLikePostId = userId+postId
-
     }
 
     override fun updatePostExpLike(postId: String, result: (UiState<String>) -> Unit) {
