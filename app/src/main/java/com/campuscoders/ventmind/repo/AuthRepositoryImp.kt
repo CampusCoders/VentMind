@@ -63,10 +63,10 @@ class AuthRepositoryImp(
     }
 
     override fun updateUserInfo(user: User, result: (UiState<String>) -> Unit) {
-        val document = database.collection(FirestoreCollection.USER).document(
-            auth.currentUser?.uid ?: "error"
-        )
 
+        val userId = auth.currentUser?.uid
+        val document = database.collection(FirestoreCollection.USER).document(userId?:"")
+        user.user_id = userId
         document.set(user)
             .addOnSuccessListener {
                 result.invoke(UiState.Success("User has been created successfully."))
