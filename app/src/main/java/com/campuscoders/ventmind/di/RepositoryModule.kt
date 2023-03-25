@@ -55,4 +55,9 @@ object RepositoryModule {
     fun provideAvatarsRepository(database: FirebaseFirestore, auth: FirebaseAuth):AvatarsRepository{
         return AvatarsRepositoryImp(database,auth)
     }
+    @Provides
+    @Singleton
+    fun provideCommentsRepository(database: FirebaseFirestore, auth: FirebaseAuth):CommentsRepository{
+        return CommentsRepositoryImp(database,auth)
+    }
 }

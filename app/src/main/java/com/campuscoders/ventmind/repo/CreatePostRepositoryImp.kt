@@ -24,7 +24,7 @@ class CreatePostRepositoryImp(
                         UiState.Success(user!!)
                     )
                 }else{
-                    result.invoke(UiState.Failure("Failed to fetch user inforöation."))
+                    result.invoke(UiState.Failure("Failed to fetch user information."))
                 }
             }
             .addOnFailureListener{
