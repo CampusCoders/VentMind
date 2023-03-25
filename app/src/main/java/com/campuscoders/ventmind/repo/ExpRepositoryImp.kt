@@ -1,5 +1,6 @@
 package com.campuscoders.ventmind.repo
 
+import com.campuscoders.ventmind.model.Dislike
 import com.campuscoders.ventmind.model.LikeExp
 import com.campuscoders.ventmind.model.PostExp
 import com.campuscoders.ventmind.util.FirestoreCollection
@@ -89,7 +90,7 @@ class ExpRepositoryImp(
                     val postExp = it.toObject(PostExp::class.java)
                     var likeCount = postExp?.post_like_count
 
-                    // check user'a göre like arttırma veya azaltma işlemleri
+                    // checkLike'a göre like arttırma veya azaltma işlemleri
                     checkLike(postId) { state ->
                         when(state) {
                             is UiState.Loading -> {}
@@ -133,9 +134,90 @@ class ExpRepositoryImp(
 
     override fun checkDislike(postId: String, result: (UiState<Boolean>) -> Unit) {
         // kullanıcı id'si ile alınan post id birleştirilip Dislike'da arama yapılır. sonuç boolean döner.
+        val userId = auth.currentUser?.uid
+        val dislikeExpId = userId + postId
+
+        val document = database.collection(FirestoreCollection.DISLIKE).document(dislikeExpId)
+        document.get()
+            .addOnSuccessListener {
+                if(it.exists()) {
+
+                    // dislike atılmış
+                    // dislike kaydını siliyoruz ve "true" yollayıp dislike atıldı bilgisini result ile veriyoruz.
+                    document.delete()
+                        .addOnCompleteListener {
+                            result.invoke(UiState.Success(true))
+                        }
+                        .addOnFailureListener {
+                            result.invoke(UiState.Failure("Dislike silme işlemi başarısız."))
+                        }
+                } else {
+
+                    // Dislike atılmamış
+                    // yeni bir Dislike kaydı oluşturuyoruz ve "false" yollayıp dislike atılmadı bilgisini result ile veriyoruz
+                    val dislike = Dislike(postId,userId)
+                    document.set(dislike)
+                        .addOnCompleteListener{
+                            result.invoke(UiState.Success(false))
+                        }
+                        .addOnFailureListener{
+                            result.invoke(UiState.Failure("Adding Dislike error"))
+                        }
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
     }
 
-    override fun updatePostExpDislike(postId: String, result: (UiState<String>) -> Unit) {
+    override fun updateDislikeCount(postId: String, result: (UiState<Boolean>) -> Unit) {
         // checkDislike sonucuna göre PostExp'de "post_dislike_count" değeri arttırılır veya azaltılır.
+        val document = database.collection(FirestoreCollection.POST_EXP).document(postId)
+        document.get()
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    val postExp = it.toObject(PostExp::class.java)
+                    var dislikeCount = postExp?.post_dislike_count
+
+                    // checkDislike'a göre dislike arttırma veya azaltma işlemleri
+                    checkDislike(postId) { state ->
+                        when(state) {
+                            is UiState.Loading -> {}
+                            is UiState.Success -> {
+                                if(state.data) {    // dislike atılmış
+                                    // Burada dislike azaltma işlemi yapılacak ve PostExp'in dislike_count'u güncellenecek
+                                    if (dislikeCount != null) { dislikeCount-- }
+                                    document.update("post_dislike_count",dislikeCount)
+                                        .addOnCompleteListener {
+                                            result.invoke(UiState.Success(false))
+                                        }
+                                        .addOnFailureListener {
+                                            result.invoke(UiState.Failure("Dislike count process error"))
+                                        }
+
+                                } else {   // dislike atılmamış
+                                    // Burada dislike arttırma işlemi yapılacak ve PostExp'in dislike_count'u güncellenecek
+                                    if(dislikeCount != null) { dislikeCount++ }
+                                    document.update("post_dislike_count", dislikeCount)
+                                        .addOnCompleteListener {
+                                            result.invoke(UiState.Success(true))
+                                        }
+                                        .addOnFailureListener {
+                                            result.invoke(UiState.Failure("Dislike count process error"))
+                                        }
+                                }
+                            }
+                            is UiState.Failure -> {
+                                result.invoke(UiState.Failure(state.error))
+                            }
+                        }
+                    }
+                } else {
+                    result.invoke(UiState.Failure("ERROR!!!"))
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
     }
 }

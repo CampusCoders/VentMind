@@ -9,5 +9,5 @@ interface ExpRepository {
     fun checkLike(postId: String, result: (UiState<Boolean>) -> Unit)
     fun updateLikeCount(postId: String, result: (UiState<Boolean>) -> Unit)
     fun checkDislike(postId: String, result: (UiState<Boolean>) -> Unit)
-    fun updatePostExpDislike(postId: String, result: (UiState<String>) -> Unit)
+    fun updateDislikeCount(postId: String, result: (UiState<Boolean>) -> Unit)
 }

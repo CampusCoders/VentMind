@@ -28,7 +28,7 @@ class FeedAdapter(
             binding.textViewFeedCommentCount.text = item.post_comment_count.toString()
             binding.textViewFeedPostContent.text = item.post_content
             binding.textViewFeedPostDate.text = item.created_at?.let { sdf.format(it) }
-            var likeCount = item.post_like_count
+            var likeCount = item.post_like_count ////////// BINDING'DEN ALMAYI DA DENE
             // clickListeners:
             binding.imageViewFeedPostAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.post_user_id ?: "") }
             binding.textViewFeedPostUsername.setOnClickListener { usernameOnItemClickListener.invoke(item.post_user_id ?: "") }
