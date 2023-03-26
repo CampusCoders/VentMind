@@ -83,19 +83,36 @@ class CommentsRepositoryImp(
             }
     }
 
-    override fun checkOwnPost(postUserId: String, result: (Boolean) -> Unit) {
-        // "post_user_id" ile auth.currentUser karşılaştırılır ve sonuç boolean döner.
+    override fun checkOwnPost(postId: String, result: (UiState<Boolean>) -> Unit) {
+        // alınan postId kullanılarak "post_user_id" ile auth.currentUser karşılaştırılır ve sonuç boolean döner.
         // kullanıcı kendi postuna mı bakıyor kontrol edilir.
         val currentUserId = auth.currentUser?.uid
-        if(currentUserId == postUserId) {
-            result.invoke(true)
-        } else {
-            result.invoke(false)
-        }
+        database.collection(FirestoreCollection.POST_FEED).document(postId).get()
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    val post = it.toObject(PostFeed::class.java)
+                    val postUserId = post?.post_user_id
+                    if(currentUserId == postUserId) {
+                        // login user ile root post'un sahibi aynı kişi
+                        result.invoke(UiState.Success(true))
+                    } else {
+                        result.invoke(UiState.Success(false))
+                    }
+                } else {
+                    result.invoke(
+                        UiState.Failure("post yok")
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
+            }
     }
 
     override fun giveAward(commentId: String, postId: String, result: (UiState<Boolean>) -> Unit) {
-
+        /*
         checkOwnPost(postId) {
             if(it) {
                 // kendi postu
@@ -144,6 +161,8 @@ class CommentsRepositoryImp(
                     }
             }
         }
+
+         */
     }
 
     override fun updateUserScore(userId: String, control: Boolean, result: (UiState<String>) -> Unit) {

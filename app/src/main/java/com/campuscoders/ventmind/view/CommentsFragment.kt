@@ -35,6 +35,7 @@ class CommentsFragment: Fragment() {
         CommentsAdapter(
             onCommentClickListener = { commentId, postId ->
                 // comment'e tıklanınca tıklanılan commentId ve root_postId yollanır.
+                println(commentId + postId)
                 viewModel.giveAwardFun(commentId,postId)
             }
         )
