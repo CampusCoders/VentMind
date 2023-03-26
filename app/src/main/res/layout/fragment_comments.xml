@@ -112,7 +112,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="24dp"
+                android:layout_marginEnd="24dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -120,7 +120,7 @@
                     android:id="@+id/imageViewCommentsLike"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
                     android:background="@drawable/ic_like"></ImageView>
 
                 <TextView
@@ -140,7 +140,7 @@
                     android:id="@+id/imageViewCommentsComments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
                     android:background="@drawable/ic_comments"></ImageView>
 
                 <TextView
@@ -164,22 +164,39 @@
 
     <EditText
         android:id="@+id/editTextComments"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="48dp"
-        android:hint="Enter your comment here"
-        android:textColor="@color/text_color"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/custom_input"
-        android:drawableRight="@drawable/ic_comment"
+        android:hint="Enter your comment here"
+        android:inputType="text"
         android:paddingStart="12dp"
         android:paddingEnd="8dp"
-        android:inputType="text"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSendComment"
+        app:layout_constraintStart_toStartOf="parent"></EditText>
+
+    <ImageView
+        android:id="@+id/imageViewSendComment"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_comment"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextComments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextComments"></ImageView>
+
+    <ProgressBar
+        android:id="@+id/progressBarComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </EditText>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,11 +16,13 @@ class CommentsAdapter(
 
     inner class MyViewHolder(val binding: PostCommentsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Comment) {
+            println("bind içinde")
             binding.textViewSubCommentsUsername.text = item.comment_user_nick
             binding.textViewSubCommentsContent.text = item.comment_content
             // avatar resmi glide ile
             if(item.comment_award != null) {
-                if(item.comment_award) {
+                if(item.comment_award!!) {
+                    println("ödül verilmiş")
                     // ödül verilmiş
                     binding.imageViewAward.show()
                 } else {
@@ -30,8 +32,18 @@ class CommentsAdapter(
             // clicklisteners:
             binding.linearSubComment.setOnClickListener {
                 // comment'e tıklanılırsa userId ve postId döner
+                if(item.comment_award != null) {
+                    if(item.comment_award!!) {
+                        println("tıklandı ödül verilmiş")
+                        // ödül verilmiş
+                        binding.imageViewAward.hide()
+                    } else {
+                        println("tıklandı ödül verilmemiş")
+                        binding.imageViewAward.show()
+                    }
+                }
                 onCommentClickListener.invoke(
-                    item.comment_user_id.toString(),
+                    item.comment_id.toString(),
                     item.comment_rootpost_id.toString()
                 )
             }

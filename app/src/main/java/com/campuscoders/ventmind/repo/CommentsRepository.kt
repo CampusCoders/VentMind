@@ -5,7 +5,7 @@ import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.util.UiState
 
 interface CommentsRepository {
-    fun setComment(comment: Comment, result: (UiState<String>) -> Unit)
+    fun setComment(comment: Comment, rootPostId: String, result: (UiState<String>) -> Unit)
     fun getRootPost(postId: String, result: (UiState<PostFeed>) -> Unit)
     fun checkOwnPost(postUserId: String, result: (Boolean) -> Unit)
     fun giveAward(commentId: String,postId: String ,result: (UiState<Boolean>) -> Unit)

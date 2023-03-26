@@ -35,9 +35,9 @@ class CommentsViewModel @Inject constructor(
     val comments: LiveData<UiState<List<Comment>>>
         get() = _comments
 
-    fun setCommentFun(comment: Comment){
+    fun setCommentFun(comment: Comment, rootPostId: String){
         _setComment.value = UiState.Loading
-        repository.setComment(comment){
+        repository.setComment(comment, rootPostId){
             _setComment.value = it
         }
     }

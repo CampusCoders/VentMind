@@ -13,8 +13,50 @@ class CommentsRepositoryImp(
     val auth: FirebaseAuth,
     ): CommentsRepository {
 
-    override fun setComment(comment: Comment, result: (UiState<String>) -> Unit) {
+    override fun setComment(comment: Comment, rootPostId: String, result: (UiState<String>) -> Unit) {
         // Comment'e yeni bir document eklenir
+
+        val userId = auth.currentUser?.uid
+        val document = database.collection(FirestoreCollection.COMMENT).document()
+
+        // User'daki veriler çekilir.
+        database.collection(FirestoreCollection.USER).document(userId?:"")
+            .get()
+            .addOnSuccessListener {
+                if (it.exists()) {
+                    val user = it.toObject(User::class.java)
+                    comment.comment_id = document.id
+                    comment.comment_rootpost_id = rootPostId
+                    comment.comment_user_id = userId
+                    comment.comment_avatar = user?.user_avatar
+                    comment.comment_user_nick = user?.user_nick
+
+                    // comment set işlemi
+                    document.set(comment)
+                        .addOnSuccessListener {
+                            // İLGİLİ POSTUN COMMENT COUNT'INI DA ARTTIR
+                            result.invoke(
+                                UiState.Success("Comment is added.")
+                            )
+                        }
+                        .addOnFailureListener {message ->
+                            result.invoke(
+                                UiState.Failure(message.localizedMessage)
+                            )
+                        }
+                } else {
+                    result.invoke(
+                        UiState.Failure("Failed to fetch user infos.")
+                    )
+                }
+            }
+            .addOnFailureListener {
+                result.invoke(
+                    UiState.Failure(it.localizedMessage)
+                )
+            }
+
+        /*
         database.collection(FirestoreCollection.COMMENT).add(comment)
             .addOnCompleteListener {
                 if (it.isSuccessful){
@@ -26,6 +68,8 @@ class CommentsRepositoryImp(
             .addOnFailureListener{
                 result.invoke(UiState.Failure("Post add operation failed, check authentication"))
             }
+
+         */
     }
 
     override fun getRootPost(postId: String, result: (UiState<PostFeed>) -> Unit) {
