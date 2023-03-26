@@ -30,12 +30,13 @@ class CommentsFragment: Fragment() {
     val viewModel: CommentsViewModel by viewModels()
 
     private var rootPostId: String? = null
+    private var checkOwnControl: Boolean = false
 
     private val commentsAdapter by lazy {
         CommentsAdapter(
             onCommentClickListener = { commentId, postId ->
                 // comment'e tıklanınca tıklanılan commentId ve root_postId yollanır.
-                viewModel.giveAwardFun(commentId,postId)
+                viewModel.giveAwardFun(commentId,postId,checkOwnControl)
             }
         )
     }
@@ -47,6 +48,17 @@ class CommentsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        observer()
+
+        val postId = arguments?.getString("post_id",null)
+        postId?.let {
+            // ekrana post ve ona bağlı commentler getirilir.
+            viewModel.getCommentsFun(it)
+            viewModel.getRootPostFun(it)
+            viewModel.checkOwnFun(it)
+            rootPostId = it
+        }
 
         // recyclewView
         binding.recyclerViewComments.adapter = commentsAdapter
@@ -60,16 +72,6 @@ class CommentsFragment: Fragment() {
                 toast("Please, enter your comment.")
             }
         }
-
-        val postId = arguments?.getString("post_id",null)
-        postId?.let {
-            // ekrana post ve ona bağlı commentler getirilir.
-            viewModel.getCommentsFun(it)
-            viewModel.getRootPostFun(it)
-            rootPostId = it
-        }
-
-        observer()
     }
 
     private fun observer() {
@@ -81,7 +83,6 @@ class CommentsFragment: Fragment() {
                 is UiState.Success -> {
                     binding.progressBarComments.hide()
                     // liste adapter'a verilir
-                    println("commentsler geldi")
                     commentsAdapter.updateList(state.data.toMutableList())
                 }
                 is UiState.Failure -> {
@@ -128,29 +129,33 @@ class CommentsFragment: Fragment() {
             }
         }
         viewModel.award.observe(viewLifecycleOwner) {state ->
-            val list: java.util.ArrayList<Boolean> = arrayListOf()
             when(state) {
                 is UiState.Loading -> {
-                    binding.progressBarComments.show()
+
                 }
                 is UiState.Success -> {
                     binding.progressBarComments.hide()
-                    if(state.data) {
-                        // ödül verilmiş
-                        println(" Fragment:")
-                        list.add(true)
-                        commentsAdapter.updateControl(list.toMutableList())
-                        list.clear()
-                    } else {
-                        println(" Fragment:")
-                        list.add(false)
-                        commentsAdapter.updateControl(list.toMutableList())
-                        list.clear()
-                    }
                 }
                 is UiState.Failure -> {
                     binding.progressBarComments.hide()
                     toast(state.error?:"error")
+                }
+            }
+        }
+        viewModel.checkOwn.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    ///
+                }
+                is UiState.Success -> {
+                    checkOwnControl = state.data
+                    var list: ArrayList<Boolean> = arrayListOf()
+                    list.add(checkOwnControl)
+                    println(" ELEMAN : ${list.first()}")
+                    commentsAdapter.updateControl(list.toMutableList())
+                }
+                is UiState.Failure -> {
+                    toast(state.error ?: "error")
                 }
             }
         }

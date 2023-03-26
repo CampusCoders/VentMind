@@ -35,6 +35,10 @@ class CommentsViewModel @Inject constructor(
     val comments: LiveData<UiState<List<Comment>>>
         get() = _comments
 
+    private val _checkOwn = MutableLiveData<UiState<Boolean>>()
+    val checkOwn: LiveData<UiState<Boolean>>
+        get() = _checkOwn
+
     fun setCommentFun(comment: Comment, rootPostId: String){
         _setComment.value = UiState.Loading
         repository.setComment(comment, rootPostId){
@@ -49,9 +53,9 @@ class CommentsViewModel @Inject constructor(
         }
     }
 
-    fun giveAwardFun(commentId: String, postId:String){
+    fun giveAwardFun(commentId: String, postId:String, control: Boolean){
         _award.value = UiState.Loading
-        repository.giveAward(commentId,postId){
+        repository.giveAward(commentId,postId,control){
             _award.value = it
         }
     }
@@ -67,6 +71,13 @@ class CommentsViewModel @Inject constructor(
         _comments.value = UiState.Loading
         repository.getComments(postId) {
             _comments.value = it
+        }
+    }
+
+    fun checkOwnFun(postId: String) {
+        _checkOwn.value = UiState.Loading
+        repository.checkOwnPost(postId) {
+            _checkOwn.value = it
         }
     }
 }

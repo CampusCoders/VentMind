@@ -14,11 +14,11 @@ class CommentsAdapter(
 ): RecyclerView.Adapter<CommentsAdapter.MyViewHolder>() {
 
     private var commentList: MutableList<Comment> = arrayListOf()
-    private var control: MutableList<Boolean> = arrayListOf(false)
+
+    private var control: MutableList<Boolean> = arrayListOf()
 
     inner class MyViewHolder(val binding: PostCommentsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Comment) {
-            println("bind içinde")
             binding.textViewSubCommentsUsername.text = item.comment_user_nick
             binding.textViewSubCommentsContent.text = item.comment_content
             // avatar resmi glide ile
@@ -30,17 +30,26 @@ class CommentsAdapter(
                 }
             }
 
-            binding.linearSubComment.setOnClickListener {
-                // comment'e tıklanılırsa userId ve postId döner
-                onCommentClickListener.invoke(
-                    item.comment_id.toString(),
-                    item.comment_rootpost_id.toString()
-                )
-
+            println(" BİND İÇİNDEYİM")
+            if(control.isNotEmpty()) {
+                println("${control.first()}")
                 if(control.first()) {
-                    binding.imageViewAward.hide()
-                } else {
-                    binding.imageViewAward.show()
+                    binding.linearSubComment.setOnClickListener {
+                        // comment'e tıklanılırsa userId ve postId döner
+                        println("1")
+                        onCommentClickListener.invoke(
+                            item.comment_id.toString(),
+                            item.comment_rootpost_id.toString()
+                        )
+
+                        if(binding.imageViewAward.visibility == View.VISIBLE) {
+                            println("2")
+                            binding.imageViewAward.hide()
+                        } else {
+                            binding.imageViewAward.show()
+                            println("3")
+                        }
+                    }
                 }
             }
         }
@@ -67,6 +76,7 @@ class CommentsAdapter(
 
     fun updateControl(list: MutableList<Boolean>) {
         this.control = list
-        println("updateControl: " + list.first().toString())
+        notifyDataSetChanged()
+        println("updateControl: ${this.control.first()}")
     }
 }
