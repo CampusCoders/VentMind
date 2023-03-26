@@ -34,10 +34,26 @@ class CommentsRepositoryImp(
                     // comment set işlemi
                     document.set(comment)
                         .addOnSuccessListener {
-                            // İLGİLİ POSTUN COMMENT COUNT'INI DA ARTTIR
-                            result.invoke(
-                                UiState.Success("Comment is added.")
-                            )
+                            // İlgili post'un comment sayısını arttırma
+                            increaseCommentCount(rootPostId) {state ->
+                                when(state) {
+                                    is UiState.Loading -> {
+                                        result.invoke(
+                                            UiState.Loading
+                                        )
+                                    }
+                                    is UiState.Success -> {
+                                        result.invoke(
+                                            UiState.Success("Comment has been added.")
+                                        )
+                                    }
+                                    is UiState.Failure -> {
+                                        result.invoke(
+                                            UiState.Failure(state.error)
+                                        )
+                                    }
+                                }
+                            }
                         }
                         .addOnFailureListener {message ->
                             result.invoke(
@@ -257,6 +273,16 @@ class CommentsRepositoryImp(
                 val post = it.toObject(PostFeed::class.java)
                 val postCommentCount = post!!.post_comment_count!!.plus(1)
                 document.update("post_comment_count",postCommentCount)
+                    .addOnSuccessListener {
+                        result.invoke(
+                            UiState.Success("Comment count has been increased.")
+                        )
+                    }
+                    .addOnFailureListener {error->
+                        result.invoke(
+                            UiState.Failure(error.localizedMessage)
+                        )
+                    }
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
