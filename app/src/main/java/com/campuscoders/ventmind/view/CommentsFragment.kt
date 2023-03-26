@@ -128,6 +128,9 @@ class CommentsFragment: Fragment() {
                 }
             }
         }
+        viewModel.award.observe(viewLifecycleOwner) {
+            
+        }
     }
 
     private fun validation(): Boolean {

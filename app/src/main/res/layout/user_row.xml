@@ -21,9 +21,10 @@
     <ImageView
         android:id="@+id/imageViewUserListAvatar"
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="46dp"
         android:layout_marginRight="12dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitEnd"
+        android:src="@drawable/avatar1"
         android:background="@drawable/custom_avatar_xl"></ImageView>
 
     <TextView

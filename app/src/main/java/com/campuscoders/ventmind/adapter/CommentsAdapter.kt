@@ -1,6 +1,7 @@
 package com.campuscoders.ventmind.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.campuscoders.ventmind.databinding.PostCommentsBinding
@@ -32,20 +33,15 @@ class CommentsAdapter(
             // clicklisteners:
             binding.linearSubComment.setOnClickListener {
                 // comment'e tıklanılırsa userId ve postId döner
-                if(item.comment_award != null) {
-                    if(item.comment_award!!) {
-                        println("tıklandı ödül verilmiş")
-                        // ödül verilmiş
-                        binding.imageViewAward.hide()
-                    } else {
-                        println("tıklandı ödül verilmemiş")
-                        binding.imageViewAward.show()
-                    }
-                }
                 onCommentClickListener.invoke(
                     item.comment_id.toString(),
                     item.comment_rootpost_id.toString()
                 )
+                if (binding.imageViewAward.visibility == View.VISIBLE) {
+                    binding.imageViewAward.hide()
+                } else {
+                    binding.imageViewAward.show()
+                }
             }
         }
     }
