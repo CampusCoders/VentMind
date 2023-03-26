@@ -112,57 +112,70 @@ class CommentsRepositoryImp(
     }
 
     override fun giveAward(commentId: String, postId: String, result: (UiState<Boolean>) -> Unit) {
-        /*
-        checkOwnPost(postId) {
-            if(it) {
-                // kendi postu
-                // tıklanılan comment çekilir
-                val document = database.collection(FirestoreCollection.COMMENT).document(commentId)
-                document.get()
-                    .addOnSuccessListener {
-                        if (it.exists()) {
-                            // comment objesi alınır
-                            val comment = it.toObject(Comment::class.java)
-                            var awardControl = comment?.comment_award
-                            val commentUserId = comment?.comment_user_id
-                            if(awardControl != null) {
-                                // eğer ödül verilmişse(true) awardControl'a false atanır
-                                // eğer ödül verilmemişse(false) awardControl'a true atanır.
-                                awardControl = !awardControl
+        checkOwnPost(postId) {state ->
+            when(state) {
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    if(state.data) {
+                        // kendi postu
+                        // tıklanılan comment çekilir
+                        val document = database.collection(FirestoreCollection.COMMENT).document(commentId)
+                        document.get()
+                            .addOnSuccessListener {
+                                if (it.exists()) {
+                                    // comment objesi alınır
+                                    val comment = it.toObject(Comment::class.java)
+                                    var awardControl = comment?.comment_award
+                                    val commentUserId = comment?.comment_user_id
+                                    if(awardControl != null) {
+                                        // eğer ödül verilmişse(true) awardControl'a false atanır
+                                        // eğer ödül verilmemişse(false) awardControl'a true atanır.
+                                        awardControl = !awardControl
 
-                                // comment'in ödül bilgisi güncellenir.
-                                document.update("comment_award",awardControl)
-
-                                // awardControl'e göre userScore arttırılır.
-                                updateUserScore(commentUserId?:"", awardControl) { state ->
-                                    when(state) {
-                                        is UiState.Loading -> {}
-                                        is UiState.Success -> {
-                                            result.invoke(UiState.Success(awardControl))
-                                        }
-                                        is UiState.Failure -> {
-                                            result.invoke(
-                                                UiState.Failure(state.error)
-                                            )
-                                        }
+                                        // comment'in ödül bilgisi güncellenir.
+                                        document.update("comment_award",awardControl)
+                                            .addOnSuccessListener {
+                                                // awardControl'e göre userScore arttırılır.
+                                                updateUserScore(commentUserId?:"", awardControl) { state ->
+                                                    when(state) {
+                                                        is UiState.Loading -> {}
+                                                        is UiState.Success -> {
+                                                            result.invoke(UiState.Success(awardControl))
+                                                        }
+                                                        is UiState.Failure -> {
+                                                            result.invoke(
+                                                                UiState.Failure(state.error)
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            .addOnFailureListener {message->
+                                                result.invoke(
+                                                    UiState.Failure(message.localizedMessage)
+                                                )
+                                            }
                                     }
+                                } else {
+                                    result.invoke(
+                                        UiState.Failure("comment not found")
+                                    )
                                 }
                             }
-                        } else {
-                            result.invoke(
-                                UiState.Failure("comment not found")
-                            )
-                        }
+                            .addOnFailureListener { error ->
+                                result.invoke(
+                                    UiState.Failure(error.localizedMessage)
+                                )
+                            }
                     }
-                    .addOnFailureListener { error ->
-                        result.invoke(
-                            UiState.Failure(error.localizedMessage)
-                        )
-                    }
+                }
+                is UiState.Failure -> {
+                    result.invoke(
+                        UiState.Failure(state.error)
+                    )
+                }
             }
         }
-
-         */
     }
 
     override fun updateUserScore(userId: String, control: Boolean, result: (UiState<String>) -> Unit) {
@@ -174,16 +187,21 @@ class CommentsRepositoryImp(
                 val user = it.toObject(User::class.java)
                 var userScore = user?.user_score
                 if(control) {
-                    userScore?.let {
-                        userScore + 100
+                    if(userScore != null) {
+                        userScore += 100
                     }
-                    result.invoke(UiState.Success("UserScore has been increased."))
                 } else {
-                    userScore?.let {
-                        userScore - 100
+                    if(userScore != null) {
+                        userScore -= 100
                     }
-                    result.invoke(UiState.Success("UserScore has been reduced."))
                 }
+                document.update("user_score", userScore)
+                    .addOnSuccessListener {
+                        result.invoke(UiState.Success("UserScore has been increased."))
+                    }
+                    .addOnFailureListener {
+                        result.invoke(UiState.Success("UserScore has been reduced."))
+                    }
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
