@@ -55,21 +55,6 @@ class CommentsRepositoryImp(
                     UiState.Failure(it.localizedMessage)
                 )
             }
-
-        /*
-        database.collection(FirestoreCollection.COMMENT).add(comment)
-            .addOnCompleteListener {
-                if (it.isSuccessful){
-                    result.invoke(UiState.Success("Post has been added"))
-                }else{
-                    result.invoke(UiState.Failure("Post add operation failed"))
-                }
-            }
-            .addOnFailureListener{
-                result.invoke(UiState.Failure("Post add operation failed, check authentication"))
-            }
-
-         */
     }
 
     override fun getRootPost(postId: String, result: (UiState<PostFeed>) -> Unit) {

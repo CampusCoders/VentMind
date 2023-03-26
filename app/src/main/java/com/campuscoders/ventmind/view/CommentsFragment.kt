@@ -35,7 +35,6 @@ class CommentsFragment: Fragment() {
         CommentsAdapter(
             onCommentClickListener = { commentId, postId ->
                 // comment'e tıklanınca tıklanılan commentId ve root_postId yollanır.
-                println(commentId + postId)
                 viewModel.giveAwardFun(commentId,postId)
             }
         )
@@ -128,8 +127,32 @@ class CommentsFragment: Fragment() {
                 }
             }
         }
-        viewModel.award.observe(viewLifecycleOwner) {
-            
+        viewModel.award.observe(viewLifecycleOwner) {state ->
+            val list: java.util.ArrayList<Boolean> = arrayListOf()
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarComments.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarComments.hide()
+                    if(state.data) {
+                        // ödül verilmiş
+                        println(" Fragment:")
+                        list.add(true)
+                        commentsAdapter.updateControl(list.toMutableList())
+                        list.clear()
+                    } else {
+                        println(" Fragment:")
+                        list.add(false)
+                        commentsAdapter.updateControl(list.toMutableList())
+                        list.clear()
+                    }
+                }
+                is UiState.Failure -> {
+                    binding.progressBarComments.hide()
+                    toast(state.error?:"error")
+                }
+            }
         }
     }
 
