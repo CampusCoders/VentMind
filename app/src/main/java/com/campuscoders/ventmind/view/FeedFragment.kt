@@ -82,7 +82,9 @@ class FeedFragment: Fragment() {
         }
         binding.profileFragment.setOnClickListener {
             // profil ekranına gider
-            findNavController().navigate(R.id.action_feedFragment_to_profileFragment)
+            findNavController().navigate(R.id.action_feedFragment_to_profileFragment, Bundle().apply {
+                putString("user_id","")
+            })
         }
         binding.userListFragment.setOnClickListener {
             // userlist ekranına gider

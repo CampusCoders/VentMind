@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.databinding.FragmentExperienceBinding
 import com.campuscoders.ventmind.viewmodel.ExpViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,9 @@ class ExperienceFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //logic
+        binding.fabExperience.setOnClickListener {
+            findNavController().navigate(R.id.action_experienceFragment_to_createPostFragment)
+        }
     }
 
     override fun onDestroyView() {

@@ -9,4 +9,5 @@ interface CreatePostRepository {
     fun getUser(result: (UiState<User>) -> Unit)
     fun addPostFeed(post: PostFeed, result: (UiState<String>) -> Unit)
     fun addPostExp(post: PostExp, result: (UiState<String>) -> Unit)
+    fun increaseTrendCount(trendName: String, result: (UiState<String>) -> Unit)
 }

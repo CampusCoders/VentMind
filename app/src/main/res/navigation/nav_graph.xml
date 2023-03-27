@@ -84,7 +84,11 @@
         android:id="@+id/experienceFragment"
         android:name="com.campuscoders.ventmind.view.ExperienceFragment"
         android:label="ExperienceFragment"
-        tools:layout="@layout/fragment_experience"/>
+        tools:layout="@layout/fragment_experience">
+        <action
+            android:id="@+id/action_experienceFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.campuscoders.ventmind.view.SettingsFragment"
