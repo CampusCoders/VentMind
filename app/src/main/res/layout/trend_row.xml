@@ -18,8 +18,7 @@
         android:layout_height="36dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="18dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/health"></ImageView>
+        android:scaleType="centerCrop"></ImageView>
 
     <TextView
         android:id="@+id/textViewTrendName"

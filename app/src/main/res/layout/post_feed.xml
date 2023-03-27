@@ -21,11 +21,13 @@
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/imageViewFeedPostAvatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:padding="2dp"
                 android:layout_margin="8dp"
+                android:src="@drawable/ic_pp"
                 android:background="@drawable/custom_avatar_xl"></ImageView>
 
             <LinearLayout
@@ -36,7 +38,7 @@
                     android:id="@+id/textViewFeedPostUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginStart="4dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -45,7 +47,7 @@
                     android:id="@+id/textViewFeedPostDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginStart="4dp"
                     android:textSize="12sp"
                     android:text="SampleDate"></TextView>
