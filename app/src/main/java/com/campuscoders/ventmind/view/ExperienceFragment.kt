@@ -9,6 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.databinding.FragmentExperienceBinding
+import com.campuscoders.ventmind.util.UiState
+import com.campuscoders.ventmind.util.hide
+import com.campuscoders.ventmind.util.show
 import com.campuscoders.ventmind.viewmodel.ExpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,10 +31,31 @@ class ExperienceFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //logic
+        observer()
+
+        viewModel.getPosts()
+
         binding.fabExperience.setOnClickListener {
             findNavController().navigate(R.id.action_experienceFragment_to_createPostFragment)
         }
+    }
+
+    private fun observer() {
+        viewModel.posts.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarExp.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarExp.hide()
+                }
+                is UiState.Failure -> {
+                    binding.progressBarExp.hide()
+                }
+            }
+        }
+        // update like count
+        // update dislike count
     }
 
     override fun onDestroyView() {
