@@ -1,51 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearUserListRow"
-    android:layout_width="wrap_content"
+    android:id="@+id/linearUserList"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:padding="8dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="18dp"
     android:background="@drawable/custom_post_background">
 
     <TextView
         android:id="@+id/textViewUserRank"
-        android:layout_width="wrap_content"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:text="1."
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="12dp"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginRight="16dp"></TextView>
+        android:layout_marginRight="24dp"></TextView>
 
-    <ImageView
-        android:id="@+id/imageViewUserListAvatar"
-        android:layout_width="50dp"
-        android:layout_height="46dp"
-        android:layout_marginRight="12dp"
-        android:scaleType="fitEnd"
-        android:src="@drawable/avatar1"
-        android:background="@drawable/custom_avatar_xl"></ImageView>
+    <LinearLayout
+        android:id="@+id/linearUserListRow"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/textViewUserListUserName"
+        <ImageView
+            android:id="@+id/imageViewUserListAvatar"
+            android:layout_width="50dp"
+            android:layout_height="46dp"
+            android:layout_marginRight="12dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/avatar1"
+            android:background="@drawable/custom_avatar_xl"></ImageView>
+
+        <TextView
+            android:id="@+id/textViewUserListUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textStyle="italic"
+            android:text="Mysp4ce"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:textStyle="italic"
-        android:text="Mysp4ce"></TextView>
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:id="@+id/textViewUserListScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center_vertical"
+            android:text="1250"></TextView>
 
-    <TextView
-        android:id="@+id/textViewUserListScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
-        android:text="1250"></TextView>
-
-    <ImageView
-        android:id="@+id/imageViewUserListStar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_star"></ImageView>
+        <ImageView
+            android:id="@+id/imageViewUserListStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_star"></ImageView>
+    </LinearLayout>
 
 </LinearLayout>

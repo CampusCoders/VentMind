@@ -15,14 +15,14 @@ class UserListAdapter(
 
     inner class MyViewHolder(val binding: UserRowBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(item: User, pos: Int) {
-            binding.textViewUserRank.text = pos.toString()
+            binding.textViewUserRank.text = pos.plus(1).toString()
             binding.textViewUserListUserName.text = item.user_nick
             binding.textViewUserListScore.text = item.user_score.toString()
             // avatar glide ile verilecek
 
             // clickListeners
-            //binding.imageViewUserListAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.user_id) }
-            //binding.textViewUserListUserName.setOnClickListener { usernameOnItemClickListener.invoke(item.user_id) }
+            binding.imageViewUserListAvatar.setOnClickListener { avatarOnItemClickListener.invoke(item.user_id.toString()) }
+            binding.textViewUserListUserName.setOnClickListener { usernameOnItemClickListener.invoke(item.user_id.toString()) }
         }
     }
 
