@@ -47,7 +47,8 @@
                     android:id="@+id/imageViewProfileAvatar"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
+                    android:padding="2dp"
                     android:background="@drawable/custom_avatar_xl"></ImageView>
                 <TextView
                     android:id="@+id/textViewProfileUserName"
@@ -75,6 +76,8 @@
                     android:id="@+id/editTextProfileBio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:hint="Enter your bio here."
+                    android:textColorHint="@color/text_color"
                     android:textColor="@color/text_color"
                     android:background="@null"
                     android:padding="12dp"
