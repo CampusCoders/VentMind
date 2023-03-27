@@ -27,8 +27,7 @@
         android:layout_marginRight="16dp"
         android:layout_gravity="center_vertical"
         android:textSize="18sp"
-        android:textStyle="italic|bold"
-        android:text="Financial Struggles"></TextView>
+        android:textStyle="italic|bold"></TextView>
 
     <TextView
         android:id="@+id/textViewTrendCount"
@@ -39,7 +38,6 @@
         android:padding="12dp"
         android:textStyle="bold"
         android:textColor="@color/text_color"
-        android:background="@drawable/custom_trend_count"
-        android:text="1250"></TextView>
+        android:background="@drawable/custom_trend_count"></TextView>
 
 </LinearLayout>

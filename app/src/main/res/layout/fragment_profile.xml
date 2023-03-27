@@ -55,7 +55,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:textColor="@color/text_color"
-                    android:text="Username"
                     android:textSize="18sp"></TextView>
             </LinearLayout>
 
@@ -82,7 +81,6 @@
                     android:textSize="18sp"
                     android:gravity="center"
                     android:textStyle="italic|bold"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id justo eget dolor rhoncus fringilla ullamcorper et turpis."
                     android:layout_marginHorizontal="12dp"></EditText>
                 <LinearLayout
                     android:id="@+id/linearEdit"
@@ -148,7 +146,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="4dp"
-            android:text="1250"
             android:textColor="@color/screen_background"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>

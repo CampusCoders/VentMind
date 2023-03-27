@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="@color/button_background"
         android:theme="@style/Widget.AppCompat.Light.ActionBar"
+        app:titleTextColor="@color/text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="15dp"
-                    android:text="SampleUsername"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
@@ -112,22 +112,11 @@
                     android:inputType="none"
                     android:padding="8dp"
                     android:text="Other"
+                    android:textColor="@color/text_color"
                     android:textSize="17sp">
                 </AutoCompleteTextView>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:gravity="end|center"
-                android:padding="4dp">
-
-                <ImageView
-                    android:id="@+id/imageViewBoost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/ic_boost"></ImageView>
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -175,7 +164,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        android:indeterminateTint="@color/white"
+        android:indeterminateTint="@color/button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></ProgressBar>

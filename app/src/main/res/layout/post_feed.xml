@@ -27,7 +27,7 @@
                 android:scaleType="fitCenter"
                 android:padding="2dp"
                 android:layout_margin="8dp"
-                android:src="@drawable/ic_pp"
+
                 android:background="@drawable/custom_avatar_xl"></ImageView>
 
             <LinearLayout
@@ -42,7 +42,7 @@
                     android:layout_marginStart="4dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:text="SampleUsername"></TextView>
+                    ></TextView>
                 <TextView
                     android:id="@+id/textViewFeedPostDate"
                     android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginStart="4dp"
                     android:textSize="12sp"
-                    android:text="SampleDate"></TextView>
+                    ></TextView>
             </LinearLayout>
 
         </LinearLayout>
@@ -60,8 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:layout_margin="8dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non elit ac lorem congue molestie. Duis non tristique orci."></TextView>
+            android:layout_margin="8dp"></TextView>
 
         <ImageView
             android:layout_width="match_parent"
@@ -89,8 +88,7 @@
                 <TextView
                     android:id="@+id/textViewFeedLikeCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="18"></TextView>
+                    android:layout_height="wrap_content"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -107,8 +105,7 @@
                 <TextView
                     android:id="@+id/textViewFeedCommentCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="18"></TextView>
+                    android:layout_height="wrap_content"></TextView>
             </LinearLayout>
         </LinearLayout>
 
@@ -126,7 +123,6 @@
             android:id="@+id/textViewFeedPostTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Relationship"
             android:textColor="@color/text_color"
             android:padding="8dp"
             android:textStyle="bold|italic"
