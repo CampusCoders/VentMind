@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/button_background"
             android:theme="@style/Widget.AppCompat.Light.ActionBar"
+            app:titleTextColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -55,10 +56,10 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/settingsFragment"
+                android:id="@+id/trendFragment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/setting"
+                android:background="@drawable/trend"
                 android:layout_marginHorizontal="18dp">
             </ImageView>
             <ImageView
@@ -69,26 +70,26 @@
                 android:layout_marginHorizontal="18dp">
             </ImageView>
             <ImageView
-                android:id="@+id/userListFragment"
+                android:id="@+id/profileFragment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/userlist"
+                android:background="@drawable/profile"
                 android:layout_marginHorizontal="18dp">
             </ImageView>
             <ImageView
-                android:id="@+id/trendFragment"
+                android:id="@+id/userListFragment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/trend"
+                android:background="@drawable/ic_compete"
                 android:layout_marginHorizontal="18dp">
             </ImageView>
 
             <ImageView
-                android:id="@+id/profileFragment"
+                android:id="@+id/settingsFragment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginHorizontal="18dp"
-                android:background="@drawable/profile"></ImageView>
+                android:background="@drawable/setting"></ImageView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
