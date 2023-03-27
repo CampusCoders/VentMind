@@ -1,12 +1,15 @@
 package com.campuscoders.ventmind.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.campuscoders.ventmind.databinding.PostCommentsBinding
 import com.campuscoders.ventmind.model.Comment
+import com.campuscoders.ventmind.util.downloadFromUrl
 import com.campuscoders.ventmind.util.hide
+import com.campuscoders.ventmind.util.placeHolderProgressBar
 import com.campuscoders.ventmind.util.show
 
 class CommentsAdapter(
@@ -18,10 +21,10 @@ class CommentsAdapter(
     private var control: MutableList<Boolean> = arrayListOf()
 
     inner class MyViewHolder(val binding: PostCommentsBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Comment) {
+        fun bind(item: Comment, context: Context) {
             binding.textViewSubCommentsUsername.text = item.comment_user_nick
             binding.textViewSubCommentsContent.text = item.comment_content
-            // avatar resmi glide ile
+            binding.imageViewSubCommentsAvatar.downloadFromUrl(item.comment_avatar, placeHolderProgressBar(context))
             if(item.comment_award != null) {
                 if(item.comment_award!!) {
                     binding.imageViewAward.show()
@@ -66,7 +69,7 @@ class CommentsAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val comment = commentList[position]
-        holder.bind(comment)
+        holder.bind(comment, holder.binding.root.context)
     }
 
     fun updateList(list: MutableList<Comment>) {
