@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_experienceFragment_to_createPostFragment"
             app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_experienceFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

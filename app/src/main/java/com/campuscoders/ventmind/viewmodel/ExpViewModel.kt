@@ -18,10 +18,32 @@ class ExpViewModel @Inject constructor(
     val posts: LiveData<UiState<List<PostExp>>>
         get() = _posts
 
+    private val _updateLikeCount = MutableLiveData<UiState<Boolean>>()
+    val updateLikeCount: LiveData<UiState<Boolean>>
+        get() = _updateLikeCount
+
+    private val _updateDislikeCount = MutableLiveData<UiState<Boolean>>()
+    val updateDislikeCount: LiveData<UiState<Boolean>>
+        get() = _updateDislikeCount
+
     fun getPosts() {
         _posts.value = UiState.Loading
         repository.getPosts {
             _posts.value = it
+        }
+    }
+
+    fun updateLike(postId: String) {
+        _updateLikeCount.value = UiState.Loading
+        repository.updateLikeCount(postId) {
+            _updateLikeCount.value = it
+        }
+    }
+
+    fun updateDislike(postId: String) {
+        _updateDislikeCount.value = UiState.Loading
+        repository.updateDislikeCount(postId) {
+            _updateDislikeCount.value = it
         }
     }
 }
