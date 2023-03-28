@@ -17,8 +17,6 @@ class ProfileRepositoryImp(
         if(auth.currentUser != null) {
             userid = auth.currentUser!!.uid
         }
-        println("ASDASDASDASDASDASDASD")
-        println(userid)
         val document = database.collection(FirestoreCollection.USER).document(userid)
         document.get()
             .addOnSuccessListener {
