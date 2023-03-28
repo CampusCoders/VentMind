@@ -1,5 +1,17 @@
 # VentMind
 
+  <img src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_white.png" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="100">
+  
+  ## Google Technologies Used
+- Android SDK
+- Google Firebase
+    - Realtime Database
+    - Authentication
+    - Storage
+
+## Other Libraries:
+- Glide by [@bumptech](https://github.com/bumptech/glide)
+
 ## Briefly :
 
 It is a social media application that offers users the opportunity to share their experiences and troubles anonymously with other users.
