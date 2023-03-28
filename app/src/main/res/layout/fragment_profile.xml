@@ -10,7 +10,7 @@
         android:id="@+id/profileConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/text_color">
+        android:background="@color/button_background_dark_grey">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarProfile"
@@ -21,93 +21,108 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="Profile">
+            app:title="Profile"
+            app:titleTextColor="@color/text_color">
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
-            android:id="@+id/linearProfile"
+            android:id="@+id/linearProfileBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="24dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:background="@drawable/custom_profile_bar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarProfile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarProfile">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerViewProfile">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/linearProfile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginVertical="20dp"
+                android:layout_marginHorizontal="24dp"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/imageViewProfileAvatar"
-                    android:layout_width="80dp"
-                    android:layout_height="76dp"
-                    android:scaleType="centerCrop"
-                    android:paddingBottom="1dp"
-                    android:background="@drawable/custom_profile_avatar"></ImageView>
-                <TextView
-                    android:id="@+id/textViewProfileUserName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarProfile">
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/imageViewProfileAvatar"
+                        android:layout_width="80dp"
+                        android:layout_height="76dp"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="1dp"
+                        android:background="@drawable/custom_profile_avatar"></ImageView>
+                    <TextView
+                        android:id="@+id/textViewProfileUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="24sp"></TextView>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
                     android:layout_marginTop="12dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="24sp"></TextView>
-            </LinearLayout>
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/custom_line"></ImageView>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginHorizontal="8dp"
-                android:background="@drawable/custom_line"></ImageView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/editTextProfileBio"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="."
-                    android:textColorHint="@color/black"
-                    android:textColor="@color/black"
-                    android:background="@null"
-                    android:padding="12dp"
-                    android:textSize="16sp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textStyle="italic"
-                    android:layout_marginHorizontal="12dp"></EditText>
-                <LinearLayout
-                    android:id="@+id/linearEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-                    <ImageView
-                        android:id="@+id/imageViewProfileEditIcon"
+                    android:layout_marginHorizontal="12dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/editTextProfileBio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="."
+                        android:textColorHint="@color/black"
+                        android:textColor="@color/black"
+                        android:background="@null"
+                        android:padding="12dp"
+                        android:textSize="16sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textStyle="italic"
+                        android:layout_marginHorizontal="12dp"></EditText>
+                    <LinearLayout
+                        android:id="@+id/linearEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="12dp"
-                        android:background="@drawable/ic_edit"></ImageView>
-                    <ImageView
-                        android:id="@+id/imageViewProfileUpdateIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_done">
-                    </ImageView>
+                        android:layout_gravity="center">
+                        <ImageView
+                            android:id="@+id/imageViewProfileEditIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="12dp"
+                            android:background="@drawable/ic_edit"></ImageView>
+                        <ImageView
+                            android:id="@+id/imageViewProfileUpdateIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ic_done">
+                        </ImageView>
+                    </LinearLayout>
                 </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewProfile"
@@ -118,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearProfile" />
+            app:layout_constraintTop_toBottomOf="@+id/linearProfileBar" />
 
         <ProgressBar
             android:id="@+id/progressBarProfile"

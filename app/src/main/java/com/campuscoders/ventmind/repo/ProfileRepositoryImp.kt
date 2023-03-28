@@ -82,8 +82,12 @@ class ProfileRepositoryImp(
     }
 
     override fun checkUser(userId: String ,result: (Boolean) -> Unit) {
+        var userid = userId
+        if(userid.equals("")) {
+            userid = auth.currentUser!!.uid
+        }
         val currentUserId = auth.currentUser?.uid
-        if(userId == currentUserId) {
+        if(userid == currentUserId) {
             // tıklanılan post'un id'si ile login olan kullanıcının id'si eşit ise
             result.invoke(true)
         } else {
