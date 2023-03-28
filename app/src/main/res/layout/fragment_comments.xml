@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Comments">
+        app:title="Comments"
+        app:titleTextColor="@color/text_color">
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -43,7 +44,8 @@
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/custom_avatar_xl"
-                android:scaleType="centerCrop"></ImageView>
+                android:scaleType="fitCenter"
+                android:padding="1dp"></ImageView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
