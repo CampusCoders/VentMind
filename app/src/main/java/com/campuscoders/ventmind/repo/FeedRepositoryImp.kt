@@ -33,6 +33,18 @@ class FeedRepositoryImp(
 
     override fun getPosts(feeling: String, result: (UiState<List<PostFeed>>) -> Unit) {
         // PostFeed'den "post_tag"e göre filtrelenmiş veriler çekilir.
+        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_tag",feeling).get()
+            .addOnSuccessListener {
+                val postList = arrayListOf<PostFeed>()
+                for (document in it){
+                    val post = document.toObject(PostFeed::class.java)
+                    postList.add(post)
+                }
+                result.invoke(UiState.Success(postList))
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
     }
 
     override fun checkLike(postId: String, result: (UiState<Boolean>) -> Unit) {
