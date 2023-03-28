@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +16,6 @@ import com.campuscoders.ventmind.databinding.FragmentFeedBinding
 import com.campuscoders.ventmind.util.UiState
 import com.campuscoders.ventmind.util.hide
 import com.campuscoders.ventmind.util.show
-import com.campuscoders.ventmind.util.toast
 import com.campuscoders.ventmind.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,16 +55,32 @@ class FeedFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentFeedBinding.inflate(inflater,container,false)
+
+        val feelings = resources.getStringArray(R.array.feelingsFeed)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, feelings)
+        binding.autoComplete.setAdapter(arrayAdapter)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // spinner
+        binding.autoComplete.addTextChangedListener {
+            val tag = it.toString()
+            if (tag == "Home") {
+                viewModel.getPosts()
+            } else {
+                viewModel.getPosts(tag)
+            }
+        }
+
         // recyclerView
         binding.recyclerViewFeed.adapter = feedAdapter
         binding.recyclerViewFeed.layoutManager = LinearLayoutManager(requireContext())
 
+        // get datas
         viewModel.getPosts()
 
         observer()
@@ -73,25 +90,20 @@ class FeedFragment: Fragment() {
             findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
         }
         binding.trendFragment.setOnClickListener {
-            // trend ekranına gider
             findNavController().navigate(R.id.action_feedFragment_to_trendFragment)
         }
         binding.experienceFragment.setOnClickListener {
-            // exp ekranına gider
             findNavController().navigate(R.id.action_feedFragment_to_experienceFragment)
         }
         binding.profileFragment.setOnClickListener {
-            // profil ekranına gider
             findNavController().navigate(R.id.action_feedFragment_to_profileFragment, Bundle().apply {
                 putString("user_id","")
             })
         }
         binding.userListFragment.setOnClickListener {
-            // userlist ekranına gider
             findNavController().navigate(R.id.action_feedFragment_to_userListFragment)
         }
         binding.settingsFragment.setOnClickListener {
-            // settings ekranına gider
             findNavController().navigate(R.id.action_feedFragment_to_settingsFragment)
         }
     }
@@ -125,6 +137,20 @@ class FeedFragment: Fragment() {
                         // like'ı bir azalt
                         feedAdapter.updateLikeCount(false)
                     }
+                }
+                is UiState.Failure -> {
+                    binding.progressBarFeed.hide()
+                }
+            }
+        }
+        viewModel.postsByTag.observe(viewLifecycleOwner) {state ->
+            when(state) {
+                is UiState.Loading -> {
+                    binding.progressBarFeed.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarFeed.hide()
+                    feedAdapter.updateList(state.data.toMutableList())
                 }
                 is UiState.Failure -> {
                     binding.progressBarFeed.hide()
