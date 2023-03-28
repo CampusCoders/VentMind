@@ -10,7 +10,7 @@
         android:id="@+id/profileConstraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/screen_background">
+        android:background="@color/text_color">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarProfile"
@@ -46,17 +46,18 @@
                 <ImageView
                     android:id="@+id/imageViewProfileAvatar"
                     android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:scaleType="fitCenter"
-                    android:padding="2dp"
-                    android:background="@drawable/custom_avatar_xl"></ImageView>
+                    android:layout_height="76dp"
+                    android:scaleType="centerCrop"
+                    android:paddingBottom="1dp"
+                    android:background="@drawable/custom_profile_avatar"></ImageView>
                 <TextView
                     android:id="@+id/textViewProfileUserName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:textColor="@color/text_color"
-                    android:textSize="18sp"></TextView>
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="24sp"></TextView>
             </LinearLayout>
 
             <ImageView
@@ -67,23 +68,24 @@
                 android:background="@drawable/custom_line"></ImageView>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/editTextProfileBio"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter your bio here."
-                    android:textColorHint="@color/text_color"
-                    android:textColor="@color/text_color"
+                    android:text="."
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
                     android:background="@null"
                     android:padding="12dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
                     android:gravity="center"
-                    android:textStyle="italic|bold"
+                    android:textStyle="italic"
                     android:layout_marginHorizontal="12dp"></EditText>
                 <LinearLayout
                     android:id="@+id/linearEdit"
@@ -149,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="4dp"
-            android:textColor="@color/screen_background"
+            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"></TextView>
         <ImageView
