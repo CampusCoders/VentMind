@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screen_background">
+    android:background="@color/text_color">
 
     <ImageView
         android:id="@+id/imageViewAppLogo"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Log in to VentMind"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold" />
 

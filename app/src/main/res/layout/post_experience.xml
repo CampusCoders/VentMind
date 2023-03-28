@@ -18,7 +18,8 @@
             android:id="@+id/imageViewExperiencePostAvatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
+            android:padding="1dp"
             android:adjustViewBounds="true"
             android:layout_margin="8dp"
             android:background="@drawable/custom_avatar_xl"></ImageView>
@@ -34,16 +35,14 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="4dp"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="SampleUsername"></TextView>
+                android:textStyle="bold"></TextView>
             <TextView
                 android:id="@+id/textViewExperiencePostDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="4dp"
-                android:textSize="12sp"
-                android:text="SampleDate"></TextView>
+                android:textSize="12sp"></TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -55,7 +54,6 @@
                 android:id="@+id/textViewPostExperienceTag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Relationship"
                 android:textColor="@color/text_color"
                 android:padding="8dp"
                 android:textStyle="bold|italic"
@@ -69,8 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:layout_margin="8dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non elit ac lorem congue molestie. Duis non tristique orci."></TextView>
+        android:layout_margin="8dp"></TextView>
 
     <ImageView
         android:layout_width="match_parent"
@@ -98,8 +95,7 @@
             <TextView
                 android:id="@+id/textViewExperienceLikeCount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="18"></TextView>
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -114,10 +110,9 @@
                 android:background="@drawable/custom_dislike"
                 android:layout_marginRight="4dp"></ImageView>
             <TextView
-                android:id="@+id/textViewExperienceCommentCount"
+                android:id="@+id/textViewExperienceDislikeCount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="18"></TextView>
+                android:layout_height="wrap_content"></TextView>
         </LinearLayout>
     </LinearLayout>
 

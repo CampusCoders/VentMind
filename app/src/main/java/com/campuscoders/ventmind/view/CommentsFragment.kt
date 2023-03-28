@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.ventmind.adapter.CommentsAdapter
 import com.campuscoders.ventmind.databinding.FragmentCommentsBinding
 import com.campuscoders.ventmind.model.Comment
-import com.campuscoders.ventmind.util.UiState
-import com.campuscoders.ventmind.util.hide
-import com.campuscoders.ventmind.util.show
-import com.campuscoders.ventmind.util.toast
+import com.campuscoders.ventmind.util.*
 import com.campuscoders.ventmind.viewmodel.CommentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -105,7 +102,7 @@ class CommentsFragment: Fragment() {
                     binding.textViewCommentsContent.text = post.post_content
                     binding.textViewCommentsLikeCount.text = post.post_like_count.toString()
                     binding.textViewCommentsCommentCount.text = post.post_comment_count.toString()
-                    // avatar glide
+                    binding.imageViewCommentsAvatar.downloadFromUrl(post.post_avatar, placeHolderProgressBar(requireContext()))
                 }
                 is UiState.Failure -> {
                     binding.progressBarComments.hide()
@@ -149,7 +146,7 @@ class CommentsFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     checkOwnControl = state.data
-                    var list: ArrayList<Boolean> = arrayListOf()
+                    val list: ArrayList<Boolean> = arrayListOf()
                     list.add(checkOwnControl)
                     println(" ELEMAN : ${list.first()}")
                     commentsAdapter.updateControl(list.toMutableList())

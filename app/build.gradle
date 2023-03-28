@@ -42,6 +42,8 @@ android {
 
 dependencies {
 
+    def supportVersion = '1.0.0'
+
     //firebase
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
@@ -63,8 +65,14 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:2.44")
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
-    // circular ImageView
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+
+    implementation "com.google.android.material:material:1.8.0"
+
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/screen_background">
+    android:background="@color/text_color">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarComments"
@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Comments">
+        app:title="Comments"
+        app:titleTextColor="@color/text_color">
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -43,7 +44,8 @@
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/custom_avatar_xl"
-                android:scaleType="centerCrop"></ImageView>
+                android:scaleType="fitCenter"
+                android:padding="1dp"></ImageView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -56,7 +58,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="15dp"
-                    android:text="SampleUsername"
                     android:textSize="16sp"
                     android:textStyle="bold"></TextView>
 
@@ -66,7 +67,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="SampleDate"
                     android:textSize="12sp"></TextView>
             </LinearLayout>
 
@@ -82,7 +82,6 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/custom_tag"
                     android:padding="8dp"
-                    android:text="Relationship"
                     android:textColor="@color/text_color"
                     android:textStyle="bold|italic"></TextView>
             </LinearLayout>
@@ -94,7 +93,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non elit ac lorem congue molestie. Duis non tristique orci."
             android:textSize="16sp"></TextView>
 
         <ImageView
@@ -126,8 +124,7 @@
                 <TextView
                     android:id="@+id/textViewCommentsLikeCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="18"></TextView>
+                    android:layout_height="wrap_content"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -146,8 +143,7 @@
                 <TextView
                     android:id="@+id/textViewCommentsCommentCount"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="18"></TextView>
+                    android:layout_height="wrap_content"></TextView>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

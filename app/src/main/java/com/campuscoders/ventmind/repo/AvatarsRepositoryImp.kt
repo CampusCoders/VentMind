@@ -29,7 +29,7 @@ class AvatarsRepositoryImp(
 
     override fun getUserScore(result: (UiState<Int>) -> Unit) {
         val document = database.collection(FirestoreCollection.USER).document(
-            auth.currentUser!!.uid ?:"error")
+            auth.currentUser?.uid ?: "")
 
         document.get()
             .addOnSuccessListener {

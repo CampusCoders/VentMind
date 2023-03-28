@@ -13,7 +13,11 @@ class ProfileRepositoryImp(
 ): ProfileRepository {
 
     override fun getUser(userId: String, result: (UiState<User>) -> Unit) {
-        val document = database.collection(FirestoreCollection.USER).document(userId)
+        var userid = userId
+        if(auth.currentUser != null) {
+            userid = auth.currentUser!!.uid
+        }
+        val document = database.collection(FirestoreCollection.USER).document(userid)
         document.get()
             .addOnSuccessListener {
                 if(it.exists()) {
@@ -35,7 +39,11 @@ class ProfileRepositoryImp(
     }
 
     override fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit) {
-        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id", userId).get()
+        var userid = userId
+        if(auth.currentUser != null) {
+            userid = auth.currentUser!!.uid
+        }
+        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id", userid).get()
             .addOnSuccessListener {
                 val postFeedListById = arrayListOf<PostFeed>()
                 for(document in it) {
@@ -71,15 +79,6 @@ class ProfileRepositoryImp(
     }
 
     override fun checkUser(userId: String ,result: (Boolean) -> Unit) {
-        /*
-        val user = auth.currentUser
-        if(user == null) {
-            result.invoke(true)
-        } else {
-            result.invoke(false)
-        }
-
-         */
         val currentUserId = auth.currentUser?.uid
         if(userId == currentUserId) {
             // tıklanılan post'un id'si ile login olan kullanıcının id'si eşit ise

@@ -5,13 +5,13 @@
         <item>Work Life</item>
         <item>Financial Struggles</item>
         <item>Mental Health</item>
-        <item>Family Issues</item>
+        <item>Family</item>
         <item>Anxiety</item>
         <item>Depression</item>
         <item>Self-Confidence</item>
-        <item>Grief</item>
         <item>Health Issues</item>
         <item>Career</item>
+        <item>Racism</item>
         <item>Other</item>
     </string-array>
 </resources>

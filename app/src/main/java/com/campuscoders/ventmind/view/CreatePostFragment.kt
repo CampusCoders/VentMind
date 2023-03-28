@@ -13,10 +13,7 @@ import com.campuscoders.ventmind.databinding.FragmentCreatePostBinding
 import com.campuscoders.ventmind.model.PostExp
 import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
-import com.campuscoders.ventmind.util.UiState
-import com.campuscoders.ventmind.util.hide
-import com.campuscoders.ventmind.util.show
-import com.campuscoders.ventmind.util.toast
+import com.campuscoders.ventmind.util.*
 import com.campuscoders.ventmind.viewmodel.CreatePostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Date
@@ -70,7 +67,7 @@ class CreatePostFragment: Fragment() {
                     binding.progressBarCreatePost.hide()
                     userObj = state.data
                     binding.textViewCreatePostUsername.text = userObj?.user_nick
-                    // avatar çekme işlemi ...
+                    binding.imageViewCreatePostAvatar.downloadFromUrl(state.data.user_avatar, placeHolderProgressBar(requireContext()))
                 }
                 is UiState.Failure -> {
                     binding.progressBarCreatePost.hide()

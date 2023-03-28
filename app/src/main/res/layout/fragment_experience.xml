@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/rootLayoutExperience">
+    android:id="@+id/rootLayoutExperience"
+    android:background="@color/text_color">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/button_background"
             android:theme="@style/Widget.AppCompat.Light.ActionBar"
+            app:titleTextColor="@color/text_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,6 +33,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbarExperience" />
+
+        <ProgressBar
+            android:id="@+id/progressBarExp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/button_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ProgressBar>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,6 +53,8 @@
         android:layout_margin="15dp"
         android:clickable="true"
         app:fabSize="normal"
+        android:backgroundTint="@color/button_background"
+        app:backgroundTint="@color/button_background"
         app:layout_anchor="@id/recyclerViewExperience"
         app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_add"

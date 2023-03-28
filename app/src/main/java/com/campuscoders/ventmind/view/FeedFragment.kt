@@ -68,10 +68,32 @@ class FeedFragment: Fragment() {
 
         observer()
 
+        // setOnClickListeners:
         binding.fabFeed.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
         }
-
+        binding.trendFragment.setOnClickListener {
+            // trend ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_trendFragment)
+        }
+        binding.experienceFragment.setOnClickListener {
+            // exp ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_experienceFragment)
+        }
+        binding.profileFragment.setOnClickListener {
+            // profil ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_profileFragment, Bundle().apply {
+                putString("user_id","")
+            })
+        }
+        binding.userListFragment.setOnClickListener {
+            // userlist ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_userListFragment)
+        }
+        binding.settingsFragment.setOnClickListener {
+            // settings ekranına gider
+            findNavController().navigate(R.id.action_feedFragment_to_settingsFragment)
+        }
     }
 
     private fun observer() {

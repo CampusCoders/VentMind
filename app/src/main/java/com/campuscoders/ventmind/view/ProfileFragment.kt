@@ -9,10 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.ventmind.adapter.FeedAdapter
 import com.campuscoders.ventmind.databinding.FragmentProfileBinding
-import com.campuscoders.ventmind.util.UiState
-import com.campuscoders.ventmind.util.hide
-import com.campuscoders.ventmind.util.show
-import com.campuscoders.ventmind.util.toast
+import com.campuscoders.ventmind.util.*
 import com.campuscoders.ventmind.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,7 +89,7 @@ class ProfileFragment: Fragment() {
                     binding.textViewProfileUserName.text = state.data.user_nick
                     binding.textViewProfileScore.text = state.data.user_score.toString()
                     binding.editTextProfileBio.setText(state.data.user_bio)
-                    // avatar
+                    binding.imageViewProfileAvatar.downloadFromUrl(state.data.user_avatar, placeHolderProgressBar(requireContext()))
                 }
                 is UiState.Failure -> {
                     binding.progressBarProfile.hide()

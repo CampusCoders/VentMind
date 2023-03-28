@@ -2,34 +2,42 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearTrendRow"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:padding="8dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="18dp"
     android:background="@drawable/custom_post_background">
 
     <ImageView
         android:id="@+id/imageViewTrendIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginRight="12dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/custom_avatar_xl"></ImageView>
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="18dp"
+        android:scaleType="centerCrop"></ImageView>
 
     <TextView
         android:id="@+id/textViewTrendName"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:textStyle="italic|bold"
-        android:text="Relationship"></TextView>
+        android:layout_marginRight="16dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="18sp"
+        android:textStyle="italic|bold"></TextView>
 
     <TextView
         android:id="@+id/textViewTrendCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="4dp"
-        android:text="1250"></TextView>
+        android:layout_gravity="center_vertical"
+        android:padding="12dp"
+        android:textStyle="bold"
+        android:textColor="@color/text_color"
+        android:background="@drawable/custom_trend_count"></TextView>
 
 </LinearLayout>
