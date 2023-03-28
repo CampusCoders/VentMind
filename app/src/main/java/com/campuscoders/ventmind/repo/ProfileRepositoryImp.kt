@@ -13,14 +13,12 @@ class ProfileRepositoryImp(
 ): ProfileRepository {
 
     override fun getUser(userId: String, result: (UiState<User>) -> Unit) {
-        /*
+
         var userid = userId
-        if(auth.currentUser != null) {
+        if(userid.equals("")) {
             userid = auth.currentUser!!.uid
         }
-
-         */
-        val document = database.collection(FirestoreCollection.USER).document(userId)
+        val document = database.collection(FirestoreCollection.USER).document(userid)
         document.get()
             .addOnSuccessListener {
                 if(it.exists()) {
@@ -42,14 +40,13 @@ class ProfileRepositoryImp(
     }
 
     override fun getUserPosts(userId: String, result: (UiState<List<PostFeed>>) -> Unit) {
-        /*
+
         var userid = userId
-        if(auth.currentUser != null) {
+        if(userid.equals("")) {
             userid = auth.currentUser!!.uid
         }
 
-         */
-        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id", userId).get()
+        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id", userid).get()
             .addOnSuccessListener {
                 val postFeedListById = arrayListOf<PostFeed>()
                 for(document in it) {
