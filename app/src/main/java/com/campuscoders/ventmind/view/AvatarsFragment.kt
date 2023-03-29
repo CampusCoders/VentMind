@@ -20,7 +20,7 @@ class AvatarsFragment: Fragment() {
 
     val viewModel: AvatarsViewModel by viewModels()
 
-    private val avatarAdaper by lazy{
+    private val avatarAdapter by lazy{
         AvatarAdapter()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -31,14 +31,16 @@ class AvatarsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerViewAvatars.adapter = avatarAdaper
+        binding.recyclerViewAvatars.adapter = avatarAdapter
         binding.recyclerViewAvatars.layoutManager = LinearLayoutManager(requireContext())
 
         observer()
     }
 
     private fun observer(){
+        viewModel.avatar.observe(viewLifecycleOwner){
 
+        }
     }
 
     override fun onDestroyView() {
