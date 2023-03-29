@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="12dp"
-    android:textColor="@color/text_color"
-    android:textStyle="bold"
-    android:textSize="16sp"
+    android:textColor="@color/black"
+    android:textSize="15sp"
     android:text="TextView" />

@@ -1,5 +1,25 @@
 # VentMind
 
+  <img src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_white.png" width="100"/> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="100">
+  
+  ## Google Technologies Used
+- Android SDK
+- Google Firebase
+    - Realtime Database
+    - Authentication
+    - Storage
+
+## Other Libraries:
+- Glide by [@bumptech](https://github.com/bumptech/glide)
+
+## ♾ Application Features ♾ :
+    💖 Share your worries and experiences.
+    💖 Share through restricted areas.
+    💖 You can comment on posts so you can interact.
+    💖 You can earn points for successful comments.
+    💖 You can rank higher among other users by increasing the number of posts you send.
+    💖 You can see the popularity of restricted domains.
+    💖 You can get different avatars with the points you earn.
 ## Briefly :
 
 It is a social media application that offers users the opportunity to share their experiences and troubles anonymously with other users.
@@ -76,3 +96,10 @@ By requesting a password renewal, the user can safely reset the password registe
 
 >Kullanıcı şifre yenileme talebinde bulunarak güvenli bir şekilde firebase üzerinde kayıtlı olan şifresini sıfırlayarak yeni bir şifre verisi ekleyebilir.
 #
+
+## Authors 📃
+
+- Hasan Ali Çalışkan [Github](https://github.com/hasanalic)
+- Okan Çezik [Github](https://github.com/okancezik)
+- Emirhan Tarım [Github](https://github.com/mudurbeyz)
+- Enes Kadumi [Github](https://github.com/eneskadumi)

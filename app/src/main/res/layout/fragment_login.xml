@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/imageViewAppLogo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="56dp"
-        android:src="@drawable/ic_star"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="26dp"
+        android:src="@drawable/newlogoo"
+        android:scaleType="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +23,7 @@
         android:id="@+id/linearLoginInputs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:layout_marginHorizontal="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
             android:layout_margin="10dp"
             android:text="Log in to VentMind"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <EditText
@@ -94,7 +95,7 @@
             android:text="Forgot Password"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/text_color"/>
+            android:textColor="@color/black"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSignIn"

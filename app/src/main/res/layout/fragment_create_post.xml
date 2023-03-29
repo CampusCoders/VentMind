@@ -42,8 +42,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/custom_avatar_xl"
-                android:scaleType="centerCrop"></ImageView>
+                android:scaleType="fitCenter"
+                android:padding="1dp"
+                android:background="@drawable/custom_avatar_xl"></ImageView>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -71,11 +72,11 @@
             android:layout_marginTop="8dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:background="@null"
-            android:textColor="@color/text_color"
-            android:textColorHint="@color/black"
-            android:textSize="16sp"
-            android:inputType="textImeMultiLine"
+            android:background="@drawable/custom_edittext"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_color"
+            android:textSize="17sp"
             android:hint="Type here ..."></EditText>
 
         <ImageView
@@ -87,7 +88,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="8dp">
@@ -99,9 +99,7 @@
                 android:layout_margin="8dp"
                 android:gravity="center"
                 app:boxBackgroundColor="@color/button_background"
-                app:counterTextColor="@color/text_color"
-                app:counterOverflowTextColor="@color/text_color"
-                android:textColorHint="@color/text_color"
+                android:textColorHint="@color/black"
                 app:placeholderTextColor="@color/text_color"
                 android:backgroundTint="@color/button_background"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
@@ -113,6 +111,7 @@
                     android:padding="8dp"
                     android:text="Other"
                     android:textColor="@color/text_color"
+                    android:outlineSpotShadowColor="@color/text_color"
                     android:textSize="17sp">
                 </AutoCompleteTextView>
             </com.google.android.material.textfield.TextInputLayout>
