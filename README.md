@@ -98,7 +98,7 @@ By requesting a password renewal, the user can safely reset the password registe
 #
 
 ## Authors 📃
-Contact Us : bloodcallteam@gmail.com
+
 - Hasan Ali Çalışkan [Github](https://github.com/hasanalic)
 - Okan Çezik [Github](https://github.com/okancezik)
 - Emirhan Tarım [Github](https://github.com/mudurbeyz)
