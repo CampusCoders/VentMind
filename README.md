@@ -12,6 +12,14 @@
 ## Other Libraries:
 - Glide by [@bumptech](https://github.com/bumptech/glide)
 
+## ♾ Application Features ♾ :
+    💖 Share your worries and experiences.
+    💖 Share through restricted areas.
+    💖 You can comment on posts so you can interact.
+    💖 You can earn points for successful comments.
+    💖 You can rank higher among other users by increasing the number of posts you send.
+    💖 You can see the popularity of restricted domains.
+    💖 You can get different avatars with the points you earn.
 ## Briefly :
 
 It is a social media application that offers users the opportunity to share their experiences and troubles anonymously with other users.
@@ -88,3 +96,10 @@ By requesting a password renewal, the user can safely reset the password registe
 
 >Kullanıcı şifre yenileme talebinde bulunarak güvenli bir şekilde firebase üzerinde kayıtlı olan şifresini sıfırlayarak yeni bir şifre verisi ekleyebilir.
 #
+
+## Authors 📃
+Contact Us : bloodcallteam@gmail.com
+- Hasan Ali Çalışkan [Github](https://github.com/hasanalic)
+- Okan Çezik [Github](https://github.com/okancezik)
+- Emirhan Tarım [Github](https://github.com/mudurbeyz)
+- Enes Kadumi [Github]()
