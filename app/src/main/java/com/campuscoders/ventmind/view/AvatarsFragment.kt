@@ -43,7 +43,9 @@ class AvatarsFragment: Fragment() {
     private fun observer(){
         viewModel.avatar.observe(viewLifecycleOwner){state->
             when(state){
-                is UiState.Loading ->{}
+                is UiState.Loading ->{
+
+                }
                 is UiState.Success ->{}
                 is UiState.Failure ->{}
             }
