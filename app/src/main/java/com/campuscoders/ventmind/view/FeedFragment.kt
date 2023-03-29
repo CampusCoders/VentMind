@@ -87,7 +87,9 @@ class FeedFragment: Fragment() {
 
         // setOnClickListeners:
         binding.fabFeed.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_createPostFragment)
+            findNavController().navigate(R.id.action_feedFragment_to_createPostFragment, Bundle().apply {
+                putString("control","feed")
+            })
         }
         binding.trendFragment.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_trendFragment)

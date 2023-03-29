@@ -63,7 +63,9 @@ class ExperienceFragment: Fragment() {
         viewModel.getPosts()
 
         binding.fabExperience.setOnClickListener {
-            findNavController().navigate(R.id.action_experienceFragment_to_createPostFragment)
+            findNavController().navigate(R.id.action_experienceFragment_to_createPostFragment, Bundle().apply {
+                putString("control","exp")
+            })
         }
     }
 

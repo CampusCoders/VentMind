@@ -41,6 +41,16 @@ class CreatePostFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //set ui
+        val userId = arguments?.getString("control",null)
+        if(userId != null) {
+            if(userId == "feed") {
+                binding.buttonShareExperience.hide()
+            } else {
+                binding.buttonShareFeeling.hide()
+            }
+        }
+
         viewModel.getUser()
 
         observer()
