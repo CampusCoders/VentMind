@@ -16,7 +16,7 @@
 
     <style name="Theme.VentMind.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/text_color</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/newlogoo</item>
         <item name="postSplashScreenTheme">@style/Theme.VentMind</item>
     </style>
 </resources>
