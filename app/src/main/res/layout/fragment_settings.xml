@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Settings">
+        app:title="Settings"
+        app:titleTextColor="@color/text_color">
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView

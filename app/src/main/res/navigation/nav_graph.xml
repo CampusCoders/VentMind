@@ -84,13 +84,6 @@
             app:popEnterAnim="@anim/pop_enter_anim"
             app:popExitAnim="@anim/pop_exit_anim" />
         <action
-            android:id="@+id/action_feedFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/enter_anim"
-            app:exitAnim="@anim/exit_anim"
-            app:popEnterAnim="@anim/pop_enter_anim"
-            app:popExitAnim="@anim/pop_exit_anim" />
-        <action
             android:id="@+id/action_feedFragment_to_userListFragment"
             app:destination="@id/userListFragment"
             app:enterAnim="@anim/enter_anim"
@@ -114,7 +107,22 @@
         android:id="@+id/profileFragment"
         android:name="com.campuscoders.ventmind.view.ProfileFragment"
         android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+        <action
+            android:id="@+id/action_profileFragment_to_avatarsFragment"
+            app:destination="@id/avatarsFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/trendFragment"
         android:name="com.campuscoders.ventmind.view.TrendFragment"
@@ -178,4 +186,9 @@
         android:name="com.campuscoders.ventmind.view.CommentsFragment"
         android:label="CommentsFragment"
         tools:layout="@layout/fragment_comments"/>
+    <fragment
+        android:id="@+id/avatarsFragment"
+        android:name="com.campuscoders.ventmind.view.AvatarsFragment"
+        android:label="AvatarsFragment"
+        tools:layout="@layout/fragment_avatars"/>
 </navigation>

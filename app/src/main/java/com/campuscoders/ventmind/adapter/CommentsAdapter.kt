@@ -33,25 +33,23 @@ class CommentsAdapter(
                 }
             }
 
-            println(" BİND İÇİNDEYİM")
             if(control.isNotEmpty()) {
-                println("${control.first()}")
                 if(control.first()) {
-                    binding.linearSubComment.setOnClickListener {
-                        // comment'e tıklanılırsa userId ve postId döner
-                        println("1")
+                    binding.linearSubComment.setOnLongClickListener {
+
                         onCommentClickListener.invoke(
                             item.comment_id.toString(),
                             item.comment_rootpost_id.toString()
                         )
 
                         if(binding.imageViewAward.visibility == View.VISIBLE) {
-                            println("2")
                             binding.imageViewAward.hide()
+                            println("HIDE")
                         } else {
                             binding.imageViewAward.show()
-                            println("3")
+                            println("SHOW")
                         }
+                        true
                     }
                 }
             }
