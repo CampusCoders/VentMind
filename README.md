@@ -102,4 +102,4 @@ Contact Us : bloodcallteam@gmail.com
 - Hasan Ali Çalışkan [Github](https://github.com/hasanalic)
 - Okan Çezik [Github](https://github.com/okancezik)
 - Emirhan Tarım [Github](https://github.com/mudurbeyz)
-- Enes Kadumi [Github]()
+- Enes Kadumi [Github](https://github.com/eneskadumi)
