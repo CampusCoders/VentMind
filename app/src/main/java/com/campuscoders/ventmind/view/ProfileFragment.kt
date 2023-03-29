@@ -68,6 +68,14 @@ class ProfileFragment: Fragment() {
             userIdFromPost = it
         }
 
+        if(userIdFromPost == "") {
+            // own profile
+            binding.imageViewProfileAvatar.setOnClickListener {
+                // avatar fragment
+                findNavController().navigate(R.id.action_profileFragment_to_avatarsFragment)
+            }
+        }
+
         // recyclerView
         binding.recyclerViewProfile.adapter = feedAdapter
         binding.recyclerViewProfile.layoutManager = LinearLayoutManager(requireContext())

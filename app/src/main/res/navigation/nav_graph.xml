@@ -115,6 +115,13 @@
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/pop_enter_anim"
             app:popExitAnim="@anim/pop_exit_anim" />
+        <action
+            android:id="@+id/action_profileFragment_to_avatarsFragment"
+            app:destination="@id/avatarsFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/trendFragment"
@@ -179,4 +186,9 @@
         android:name="com.campuscoders.ventmind.view.CommentsFragment"
         android:label="CommentsFragment"
         tools:layout="@layout/fragment_comments"/>
+    <fragment
+        android:id="@+id/avatarsFragment"
+        android:name="com.campuscoders.ventmind.view.AvatarsFragment"
+        android:label="AvatarsFragment"
+        tools:layout="@layout/fragment_avatars"/>
 </navigation>
