@@ -112,12 +112,6 @@
                 android:background="@drawable/ic_compete"
                 android:layout_marginHorizontal="18dp">
             </ImageView>
-            <ImageView
-                android:id="@+id/settingsFragment"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginHorizontal="18dp"
-                android:background="@drawable/settings"></ImageView>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

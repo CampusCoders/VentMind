@@ -108,9 +108,6 @@ class FeedFragment: Fragment() {
         binding.userListFragment.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_userListFragment)
         }
-        binding.settingsFragment.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_settingsFragment)
-        }
     }
 
     private fun observer() {

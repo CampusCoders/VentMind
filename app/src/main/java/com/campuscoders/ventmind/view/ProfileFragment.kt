@@ -1,12 +1,15 @@
 package com.campuscoders.ventmind.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.campuscoders.ventmind.MainActivity
+import com.campuscoders.ventmind.R
 import com.campuscoders.ventmind.adapter.FeedAdapter
 import com.campuscoders.ventmind.databinding.FragmentProfileBinding
 import com.campuscoders.ventmind.util.*
@@ -42,6 +45,21 @@ class ProfileFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity() as? MainActivity)?.setSupportActionBar(binding.toolbarProfile)
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object: MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.profile_menu,menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+                return true
+            }
+
+        },viewLifecycleOwner)
 
         val userId = arguments?.getString("user_id",null)
         userId?.let {
