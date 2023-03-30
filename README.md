@@ -2,6 +2,8 @@
 
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="100"/> <img src="https://firebase.google.com/static/images/brand-guidelines/logo-vertical.png" width="100">
   
+  [Our video presentation](https://www.youtube.com/watch?v=G9ZGoM4_3js)
+  
   ## Google Technologies Used
 - Android SDK
 - Google Firebase
@@ -96,6 +98,15 @@ By requesting a password renewal, the user can safely reset the password registe
 
 >Kullanıcı şifre yenileme talebinde bulunarak güvenli bir şekilde firebase üzerinde kayıtlı olan şifresini sıfırlayarak yeni bir şifre verisi ekleyebilir.
 #
+
+## Screenshots📷
+|       **Login Page**               |              **Register Page**     |        **Forgot Password Page**    |            **Feed Page**           |
+|:----------------------------------:|:----------------------------------:|:----------------------------------:|:----------------------------------:|
+|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenlogin.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenregister.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenforgotpassword.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenfeed.PNG)|
+|         **Create Post Page**      |         **Trend Page**       |           **User List Page**     |           **Profil Page**           |
+|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screencreatefeed.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screentrend.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenuserlist.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenprofil.PNG)|
+|         **Settings Page**      |         **Experience Page**       |           **Comments Page**     |
+|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screensettings.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenexperience.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screencomments.PNG)|
 
 ## Authors 📃
 
