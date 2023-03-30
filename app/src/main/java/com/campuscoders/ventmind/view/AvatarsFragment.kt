@@ -41,6 +41,7 @@ class AvatarsFragment: Fragment() {
         observer()
 
         viewModel.getAvatarsFun()
+        viewModel.getUserScore()
     }
 
     private fun observer(){
