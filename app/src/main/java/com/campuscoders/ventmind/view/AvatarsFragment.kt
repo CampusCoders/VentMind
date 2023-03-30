@@ -26,7 +26,12 @@ class AvatarsFragment: Fragment() {
     val viewModel: AvatarsViewModel by viewModels()
 
     private val avatarAdapter by lazy{
-        AvatarAdapter()
+        AvatarAdapter(
+            onAvatarClickListener = {
+                // avatar source
+
+            }
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

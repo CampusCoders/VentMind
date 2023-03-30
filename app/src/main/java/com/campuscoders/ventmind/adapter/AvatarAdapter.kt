@@ -9,7 +9,9 @@ import com.campuscoders.ventmind.model.Avatar
 import com.campuscoders.ventmind.util.downloadFromUrl
 import com.campuscoders.ventmind.util.placeHolderProgressBar
 
-class AvatarAdapter: RecyclerView.Adapter<AvatarAdapter.MyAvatarViewHolder>() {
+class AvatarAdapter(
+    val onAvatarClickListener: (String) -> Unit
+): RecyclerView.Adapter<AvatarAdapter.MyAvatarViewHolder>() {
 
     private var avatarList: MutableList<Avatar> = arrayListOf()
 
@@ -17,6 +19,9 @@ class AvatarAdapter: RecyclerView.Adapter<AvatarAdapter.MyAvatarViewHolder>() {
         fun bind(item: Avatar, context: Context) {
             binding.textViewAvatarPrice.text = item.avatar_price.toString()
             binding.imageViewSingleAvatar.downloadFromUrl(item.avatar_source, placeHolderProgressBar(context))
+            binding.linearSingleAvatar.setOnClickListener {
+                onAvatarClickListener.invoke(item.avatar_source.toString())
+            }
         }
     }
 

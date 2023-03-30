@@ -1,6 +1,7 @@
 package com.campuscoders.ventmind.repo
 
 import com.campuscoders.ventmind.model.Avatar
+import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
@@ -43,6 +44,28 @@ class AvatarsRepositoryImp(
             }
             .addOnFailureListener{
                 result.invoke(UiState.Failure("Authentication failed"))
+            }
+    }
+
+    override fun changeAvatar(avatarSource: String ,result: (UiState<String>) -> Unit) {
+        val userId = auth.currentUser?.uid
+        database.collection(FirestoreCollection.USER).document(userId?:"")
+            .update("user_avatar",avatarSource)
+            .addOnSuccessListener {
+                // changeAvataronpost()
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
+    }
+
+    fun changeAvatarOnPosts(avatarSource: String, userId: String, result: (UiState<String>) -> Unit) {
+        database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id",userId).get()
+            .addOnSuccessListener {
+
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
             }
     }
 }
