@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.ventmind.adapter.AvatarAdapter
 import com.campuscoders.ventmind.databinding.FragmentAvatarsBinding
 import com.campuscoders.ventmind.util.UiState
@@ -27,6 +28,7 @@ class AvatarsFragment: Fragment() {
     private val avatarAdapter by lazy{
         AvatarAdapter()
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentAvatarsBinding.inflate(inflater,container,false)
         return binding.root
@@ -35,8 +37,10 @@ class AvatarsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
         binding.recyclerViewAvatars.adapter = avatarAdapter
-        binding.recyclerViewAvatars.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewAvatars.layoutManager = staggeredGridLayoutManager
+        binding.recyclerViewAvatars.itemAnimator = null
 
         observer()
 

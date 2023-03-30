@@ -6,14 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="36dp"
+    android:layout_marginVertical="32dp"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:background="@drawable/custom_avatar_bac">
 
     <ImageView
         android:id="@+id/imageViewSingleAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/custom_avatar_xl"
         android:scaleType="centerCrop"></ImageView>
 
     <LinearLayout
