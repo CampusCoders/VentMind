@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.campuscoders.ventmind.adapter.AvatarAdapter
 import com.campuscoders.ventmind.databinding.FragmentAvatarsBinding
 import com.campuscoders.ventmind.util.UiState
+import com.campuscoders.ventmind.util.hide
+import com.campuscoders.ventmind.util.show
+import com.campuscoders.ventmind.util.toast
 import com.campuscoders.ventmind.viewmodel.AvatarsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,10 +47,16 @@ class AvatarsFragment: Fragment() {
         viewModel.avatar.observe(viewLifecycleOwner){state->
             when(state){
                 is UiState.Loading ->{
-
+                    binding.progressBarAvatar.show()
                 }
-                is UiState.Success ->{}
-                is UiState.Failure ->{}
+                is UiState.Success ->{
+                    binding.progressBarAvatar.hide()
+                    avatarAdapter.updateList(state.data.toMutableList())
+                }
+                is UiState.Failure ->{
+                    binding.progressBarAvatar.hide()
+                    toast(state.error?:"")
+                }
             }
 
         }
