@@ -71,10 +71,8 @@ If you wish to build this project you should make your own firebase project, and
 |![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenlogin.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenregister.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenforgotpassword.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenfeed.PNG)|
 |         **Create Post Page**      |         **Trend Page**       |           **User List Page**     |           **Profil Page**           |
 |![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screencreatefeed.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screentrend.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenuserlist.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenprofil.PNG)|
-|         **Settings Page**      |         **Experience Page**       |           **Comments Page**     |
-|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screensettings.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenexperience.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screencomments.PNG)|
-
-[Our Video Presentation](https://www.youtube.com/watch?v=LK_cRpyMtHs)
+|         **Experience Page**       |           **Comments Page**     |
+![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screenexperience.PNG)|![](https://github.com/mudurbeyz/mudurbeyz.github.io/blob/main/Document/screencomments.PNG)|
 
 ## Authors 📃
 
