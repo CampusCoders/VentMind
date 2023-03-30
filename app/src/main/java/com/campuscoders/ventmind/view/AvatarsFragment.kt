@@ -71,7 +71,7 @@ class AvatarsFragment: Fragment() {
                 }
                 is UiState.Success -> {
                     binding.progressBarAvatar.hide()
-                    toast(state.data.toString())
+                    binding.textViewAvatarsScore.text = state.data.toString()
                 }
                 is UiState.Failure -> {
                     binding.progressBarAvatar.hide()
