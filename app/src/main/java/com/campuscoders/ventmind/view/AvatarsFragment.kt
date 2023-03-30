@@ -60,6 +60,21 @@ class AvatarsFragment: Fragment() {
                 }
             }
 
+        viewModel.userScore.observe(viewLifecycleOwner){state->
+            when(state){
+                is UiState.Loading -> {
+                    binding.progressBarAvatar.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarAvatar.hide()
+                    toast(state.data.toString())
+                }
+                is UiState.Failure -> {
+                    binding.progressBarAvatar.hide()
+                    toast(state.error?:"")
+                }
+            }
+        }
         }
     }
 
