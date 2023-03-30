@@ -5,7 +5,7 @@
   ## Google Technologies Used
 - Android SDK
 - Google Firebase
-    - Realtime Database
+    - Firestore Database
     - Authentication
     - Storage
 
