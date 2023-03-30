@@ -1,7 +1,6 @@
 package com.campuscoders.ventmind.repo
 
 import com.campuscoders.ventmind.model.Avatar
-import com.campuscoders.ventmind.model.PostFeed
 import com.campuscoders.ventmind.model.User
 import com.campuscoders.ventmind.util.FirestoreCollection
 import com.campuscoders.ventmind.util.UiState
@@ -52,17 +51,32 @@ class AvatarsRepositoryImp(
         database.collection(FirestoreCollection.USER).document(userId?:"")
             .update("user_avatar",avatarSource)
             .addOnSuccessListener {
-                // changeAvataronpost()
+                changeAvatarOnPosts(avatarSource,userId.toString()) {state->
+                    when(state) {
+                        is UiState.Loading -> {}
+                        is UiState.Success -> {
+                            result.invoke(UiState.Success(state.data))
+                        }
+                        is UiState.Failure -> {
+                            result.invoke(UiState.Failure(state.error))
+                        }
+                    }
+                }
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
             }
     }
 
-    fun changeAvatarOnPosts(avatarSource: String, userId: String, result: (UiState<String>) -> Unit) {
+    override fun changeAvatarOnPosts(avatarSource: String, userId: String, result: (UiState<String>) -> Unit) {
         database.collection(FirestoreCollection.POST_FEED).whereEqualTo("post_user_id",userId).get()
             .addOnSuccessListener {
-
+                for (document in it) {
+                    val postId = document["post_id"]
+                    database.collection(FirestoreCollection.POST_FEED).document(postId.toString())
+                        .update("post_avatar",avatarSource)
+                }
+                result.invoke(UiState.Success("PostFeed's avatar sources have been updated."))
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))

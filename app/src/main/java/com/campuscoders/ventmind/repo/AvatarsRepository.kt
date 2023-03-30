@@ -7,4 +7,5 @@ interface AvatarsRepository {
     fun getAvatars(result: (UiState<List<Avatar>>) -> Unit)
     fun getUserScore(result: (UiState<Int>) -> Unit)
     fun changeAvatar(avatarSource: String ,result: (UiState<String>) -> Unit)
+    fun changeAvatarOnPosts(avatarSource: String, userId: String, result: (UiState<String>) -> Unit)
 }

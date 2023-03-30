@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.campuscoders.ventmind.adapter.AvatarAdapter
@@ -29,7 +30,7 @@ class AvatarsFragment: Fragment() {
         AvatarAdapter(
             onAvatarClickListener = {
                 // avatar source
-
+                viewModel.changeAvatar(it)
             }
         )
     }
@@ -68,7 +69,7 @@ class AvatarsFragment: Fragment() {
                     toast(state.error?:"")
                 }
             }
-
+        }
         viewModel.userScore.observe(viewLifecycleOwner){state->
             when(state){
                 is UiState.Loading -> {
@@ -84,6 +85,20 @@ class AvatarsFragment: Fragment() {
                 }
             }
         }
+        viewModel.changedAvatar.observe(viewLifecycleOwner) {state->
+            when(state){
+                is UiState.Loading -> {
+                    binding.progressBarAvatar.show()
+                }
+                is UiState.Success -> {
+                    binding.progressBarAvatar.hide()
+                    findNavController().popBackStack()
+                }
+                is UiState.Failure -> {
+                    binding.progressBarAvatar.hide()
+                    toast(state.error?:"")
+                }
+            }
         }
     }
 
