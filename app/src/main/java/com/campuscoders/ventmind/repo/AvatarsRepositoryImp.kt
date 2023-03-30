@@ -55,7 +55,17 @@ class AvatarsRepositoryImp(
                     when(state) {
                         is UiState.Loading -> {}
                         is UiState.Success -> {
-                            result.invoke(UiState.Success(state.data))
+                            changeAvatarOnComments(avatarSource,userId.toString()) {st ->
+                                when(st) {
+                                    is UiState.Loading -> {}
+                                    is UiState.Success -> {
+                                        result.invoke(UiState.Success(state.data))
+                                    }
+                                    is UiState.Failure -> {
+                                        result.invoke(UiState.Failure(st.error))
+                                    }
+                                }
+                            }
                         }
                         is UiState.Failure -> {
                             result.invoke(UiState.Failure(state.error))
@@ -77,6 +87,21 @@ class AvatarsRepositoryImp(
                         .update("post_avatar",avatarSource)
                 }
                 result.invoke(UiState.Success("PostFeed's avatar sources have been updated."))
+            }
+            .addOnFailureListener {
+                result.invoke(UiState.Failure(it.localizedMessage))
+            }
+    }
+
+    override fun changeAvatarOnComments(avatarSource: String, userId: String, result: (UiState<String>) -> Unit) {
+        database.collection(FirestoreCollection.COMMENT).whereEqualTo("comment_user_id",userId).get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val commentId = document["comment_id"]
+                    database.collection(FirestoreCollection.COMMENT).document(commentId.toString())
+                        .update("comment_avatar",avatarSource)
+                }
+                result.invoke(UiState.Success("Comment's avatar sources have been updated."))
             }
             .addOnFailureListener {
                 result.invoke(UiState.Failure(it.localizedMessage))
